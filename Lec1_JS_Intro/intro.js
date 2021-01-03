@@ -73,4 +73,4 @@ let key = "name";
 // bracket notation
 console.log(   obj[key]  );
 console.log(  obj["best friend"]  );
-console.log(obj.skills[1]);
+console.log(obj.skills[1]); 
