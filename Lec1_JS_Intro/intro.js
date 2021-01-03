@@ -74,11 +74,3 @@ let key = "name";
 console.log(   obj[key]  );
 console.log(  obj["best friend"]  );
 console.log(obj.skills[1]);
-
-
-
-
-
-
-
-
