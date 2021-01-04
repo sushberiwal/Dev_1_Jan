@@ -2,10 +2,9 @@
 const fs = require("fs");
 
 // get files of a directory
-let folderPath = "../../../Downloads"
+let folderPath = "./testFolder";
 
 let files = fs.readdirSync(folderPath);
-
 // console.log(files);
 // console.log(files);
 
