@@ -18,6 +18,8 @@ let htmlKaData = fs.readFileSync("./index.html");
 let ch = cheerio.load(htmlKaData);
 
 
+//jquery
+
 let h1KaData = ch("h1").text();
 //  <h1>Heading 1</h1>
 // console.log(h1KaData);
@@ -32,6 +34,8 @@ let pkaData = ch("ul p").text();
 
 // let outerPkaData = ch(".outer.main").text();
 // console.log(outerPkaData);
+
+// selectors 
 
 let innerPKaData = ch("ul .outer").text();
 console.log(innerPKaData);
