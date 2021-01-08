@@ -3,6 +3,7 @@ const id = "yejak47744@nonicamy.com";
 const pw = "123456789";
 let tab;
 let idx;
+let gCode;
 // temp-mail
 // launch browser
 // all functions of puppeteer are promisified => pending promise
@@ -22,6 +23,7 @@ browserOpenPromise
   .then(function(pages) {
     let page = pages[0];
     tab = page;
+    
     let gotoPromise = page.goto("https://www.hackerrank.com/auth/login");
     return gotoPromise;
   })
@@ -59,7 +61,7 @@ browserOpenPromise
     let allLinksPromises = [];
     // let allLinksPromises = [ Promise<Pending> , Promise<Pending> , Promise<Pending> , Promise<Pending>  ];
     for(let i=0 ; i<allATags.length ; i++){
-     let linkPromise =  tab.evaluate( function(elem){  return elem.getAttribute("href");    }      ,   allATags[i]  );
+     let linkPromise =  tab.evaluate( function(elem){  return elem.getAttribute("href");  }  ,  allATags[i]  );
      allLinksPromises.push(linkPromise);
     }
 
@@ -71,9 +73,10 @@ browserOpenPromise
       return `https://www.hackerrank.com${link}`;
     });
     // console.log(completeLinks);
-
-    let oneQuesSolvePromise = solveQuestion(completeLinks[0]);
-    return oneQuesSolvePromise;
+    for(let i=0 ; i<completeLinks.length ; i++){
+      solveQuestion(completeLinks[i]);
+    }
+    // return oneQuesSolvePromise;
   })
   .then(function(){
     console.log("One Question Solved !!");
@@ -140,10 +143,56 @@ browserOpenPromise
         return codePromise;
       })
       .then(function(code){
-        console.log(code);
+        // console.log(code);
+        gCode = code;
+        resolve();
       })
       .catch(function(error){
+        reject(error);
+      })
+    })
+  }
 
+  function pasteCode(){
+    return new Promise(function(resolve , reject){
+      let waitAndClickPromise = waitAndClick('.custom-input-checkbox');
+      waitAndClickPromise.then(function(){
+        let codeTypePromise = tab.type(".custominput" , gCode);
+        return codeTypePromise;
+      })
+      .then(function(){
+        let ctrlDownPromise = tab.keyboard.down("Control");
+        return ctrlDownPromise;
+      })
+      .then(function(){
+        let aKeyPromise = tab.keyboard.press("A");
+        return aKeyPromise;
+      })
+      .then(function(){
+        let xKeyPromise = tab.keyboard.press("X");
+        return xKeyPromise;
+      })
+      .then(function(){
+        let clickPromise = tab.click('.monaco-scrollable-element.editor-scrollable.vs');
+        return clickPromise;
+      })
+      .then(function(){
+        let aKeyPromise = tab.keyboard.press("A");
+        return aKeyPromise;
+      })
+      .then(function(){
+        let vKeyPromise = tab.keyboard.press("V");
+        return vKeyPromise;
+      })
+      .then(function(){
+        let ctrlUpPromise = tab.keyboard.up("Control");
+        return ctrlUpPromise;
+      })
+      .then(function(){
+        resolve();
+      })
+      .catch(function(error){
+        reject(error);
       })
     })
   }
@@ -161,10 +210,22 @@ browserOpenPromise
         return getCodePromise;
       })
       .then(function(){
-
+        let quesClickedPromise = tab.click('div[data-attr2="Problem"]');
+        return quesClickedPromise;
+      })
+      .then(function(){
+        let pasteCodePromise = pasteCode();
+        return pasteCodePromise;
+      })
+      .then(function(){
+        let quesSubmitPromise = tab.click('.pull-right.btn.btn-primary.hr-monaco-submit');
+        return quesSubmitPromise;
+      })
+      .then(function(){
+        resolve();
       })
       .catch(function(error){
-        console.log(error);
+        reject(error);
       })
     })
   }
