@@ -217,7 +217,7 @@ browserOpenPromise
       .catch(function(error){
         // lock btn not found !
         console.log("Lock btn not found !!!");
-        resolve();
+        resolve();gotoQuesPromoisegotoQuesPromoisegotoQuesPromoisegotoQuesPromoisegotoQuesPromoise
       })
     });
   }
