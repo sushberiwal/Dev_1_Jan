@@ -64,7 +64,6 @@ browserOpenPromise
      let linkPromise =  tab.evaluate( function(elem){  return elem.getAttribute("href");  }  ,  allATags[i]  );
      allLinksPromises.push(linkPromise);
     }
-
     let pendingPromise = Promise.all(allLinksPromises);
     return pendingPromise;
   })
@@ -72,14 +71,20 @@ browserOpenPromise
     let completeLinks = allLinks.map(  function(link){
       return `https://www.hackerrank.com${link}`;
     });
+
+    let oneQuesSolvePromise = solveQuestion(completeLinks[0]);
+    
     // console.log(completeLinks);
-    for(let i=0 ; i<completeLinks.length ; i++){
-      solveQuestion(completeLinks[i]);
+    for(let i=1 ; i<completeLinks.length ; i++){
+      oneQuesSolvePromise = oneQuesSolvePromise.then(function(){
+        let nextQuesPromise = solveQuestion(completeLinks[i]);
+        return nextQuesPromise;
+      })
     }
-    // return oneQuesSolvePromise;
+    return oneQuesSolvePromise;
   })
   .then(function(){
-    console.log("One Question Solved !!");
+    console.log("All Questions Solved !!");
   })
   .catch(function(error){
     console.log(error);
@@ -197,6 +202,26 @@ browserOpenPromise
     })
   }
 
+  function handleLockBtn(){
+    return new Promise(function(resolve , reject){
+      let waitPromise = tab.waitForSelector('.editorial-content-locked' , {visible:true , timeout:5000});
+      waitPromise.then(function(){
+        let lockBtnClickPromise = tab.click('.ui-btn.ui-btn-normal.ui-btn-primary.ui-btn-styled');
+        return lockBtnClickPromise;
+      })
+      .then(function(){
+        // lock btn found !!
+        console.log("Lock btn found !!!");
+        resolve();
+      })
+      .catch(function(error){
+        // lock btn not found !
+        console.log("Lock btn not found !!!");
+        resolve();
+      })
+    });
+  }
+
   function solveQuestion(qLink){
     return new Promise(function(resolve , reject){
       let gotoQuesPromoise = tab.goto(qLink);
@@ -204,6 +229,10 @@ browserOpenPromise
         console.log("Reached question !!");
         let waitAndClickPromise = waitAndClick('div[data-attr2="Editorial"]');
         return waitAndClickPromise;
+      }).then(function(){
+        // handle lock btn
+        let lockBtnPromise = handleLockBtn();
+        return lockBtnPromise;
       })
       .then(function(){
         let getCodePromise = getCode();
