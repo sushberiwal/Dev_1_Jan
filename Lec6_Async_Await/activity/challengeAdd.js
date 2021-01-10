@@ -3,8 +3,6 @@ const challenges = require("./challenges");
 const id = "yejak47744@nonicamy.com";
 const pw = "123456789";
 
-
-
 (async function(){
     try{
         let browser = await puppeteer.launch({
@@ -34,9 +32,8 @@ const pw = "123456789";
         // console.log(addChallengeLink);
         for(let i=0 ; i<challenges.length ; i++){
             let newTab = await browser.newPage();
-            addChallenge(addChallengeLink , newTab);
+            addChallenge(addChallengeLink , newTab , challenges[i]);
         }
-
     }
     catch(error){
         console.log(error);
@@ -44,6 +41,35 @@ const pw = "123456789";
 })();
 
 
-async function addChallenge(link , newTab){
+async function addChallenge(link , newTab , challenge){
+    // {
+    //     "Challenge Name": "Pep_Java_1GettingStarted_1IsPrime",
+    //     "Description": "Question 1",
+    //     "Problem Statement": "Take as input a number n. Determine whether it is prime or not. If it is prime, print 'Prime' otherwise print 'Not Prime.",
+    //     "Input Format": "Integer",
+    //     "Constraints": "n <= 10 ^ 9",
+    //     "Output Format": "String",
+    //     "Tags": "Basics",
+    //   }
+    let challengeName = challenge["Challenge Name"];
+    let description = challenge["Description"];
+    let problemStatement = challenge["Problem Statement"];
+    let inputFormat = challenge["Input Format"];
+    let constraints = challenge["Constraints"];
+    let outputFormat = challenge["Output Format"];
+    let tags = challenge["Tags"];
+
     await newTab.goto(link);
+    await newTab.waitForSelector('#name' , {visible:true});
+    await newTab.type("#name" , challengeName);
+    await newTab.type("#preview" , description);
+    await newTab.waitForSelector('#problem_statement-container .CodeMirror textarea' , {visible:true});
+    await newTab.type('#problem_statement-container .CodeMirror textarea' , problemStatement);
+    await newTab.type('#input_format-container .CodeMirror textarea' , inputFormat);
+    await newTab.type('#constraints-container .CodeMirror textarea' , constraints);
+    await newTab.type('#output_format-container .CodeMirror textarea' , outputFormat);
+    await newTab.type('#tags_tag' , tags);
+    await newTab.keyboard.press("Enter");
+    await newTab.click('.save-challenge.btn.btn-green');
+    await newTab.close();
 }
