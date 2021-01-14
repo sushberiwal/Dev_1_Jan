@@ -1,0 +1,27 @@
+*{
+    box-sizing: border-box; 
+}
+
+html,body{
+    margin: 0px;
+}
+
+.menu{
+    height: 40px;
+    border: 1px solid;
+}
+.menu-options{
+    height: 60px;
+    border: 1px solid;
+}
+.address{
+    height: 40px;
+    border: 1px solid;
+}
+.sheets{
+    height: 40px;
+    border: 1px solid;
+}
+.cells{
+    height: calc(100vh - 180px);
+}
