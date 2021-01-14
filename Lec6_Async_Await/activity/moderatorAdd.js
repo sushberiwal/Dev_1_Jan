@@ -49,7 +49,6 @@ async function addModerators(browser , tab){
     }
 
     console.log(allLinks);
-
     // call let modAddPromise = addModeratorToAsingleQues(newTab , qLinks); // dont use await
     // loop on all ques links
     let moderatorAddPromises = [];
