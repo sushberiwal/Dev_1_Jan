@@ -8,6 +8,7 @@
 // electron code 
 
 const electron = require("electron");
+const ejse = require("ejs-electron");
 
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
@@ -22,7 +23,7 @@ function createWindow () {
       }
     })
   
-    win.loadFile('index.html').then(function(){
+    win.loadFile('index.ejs').then(function(){
         win.maximize();
         win.webContents.openDevTools();
     })

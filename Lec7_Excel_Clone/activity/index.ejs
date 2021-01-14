@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="menu">Menu</div>
+    <div class="menu-options">Menu-options</div>
+    <div class="address">address</div>
+
+    <div class="content">
+        <div class="top-left-cell"></div>
+        <div class="top-row">
+            <%for(let j=0 ; j<26 ; j++){%>
+                <div class="top-row-cell"> <%= String.fromCharCode(j+65)%>  </div>
+            <%}%>
+        </div>
+        <div class="left-col">
+            <%for(let j=0 ; j<100 ; j++){%>
+                <div class="left-col-cell"> <%=j+1%> </div>
+            <%}%>
+        </div>
+        <div class="cells">
+            <!-- 100 * 26 -->
+            <%for(let i=0 ; i<100 ; i++){%>
+                <div class="row">
+                    <%for(let j=0 ; j<26 ; j++){%>
+                        <div class="cell" contentEditable="true"></div>
+                    <%}%>
+                </div>
+                <%}%>
+        </div>
+    </div>
+
+    
+    
+    
+    <div class="sheets">Sheets</div>
+    <script src="./script.js"></script>
+</body>
+</html>
