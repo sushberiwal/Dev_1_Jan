@@ -29,8 +29,13 @@ $(function(){
         let colId = $(this).attr("colid");
         let cellObject = db[rowId][colId];
 
+        // ui wali value
         let value = $(this).text();
         if(value && cellObject.value != value){
+            if(cellObject.formula){
+                deleteFormula(cellObject);
+                $("#formula").val("");
+            }
             // db update
             cellObject.value = value;
             // console.log(db);
@@ -51,15 +56,40 @@ $(function(){
         let colId = $(lsc).attr("colid");
         let cellObject = db[rowId][colId];
         if(formula && cellObject.formula != formula){
+            // 4. formula to formula
+            if(cellObject.formula){
+                deleteFormula(cellObject);
+            }
+
             cellObject.formula = formula;
             let value = solve(formula , cellObject);
             // db update
             cellObject.value = value;
             // ui update
             $(lsc).text(value);
-            console.log(db);
+            // update childrens
+            updateChildrens(cellObject);
+            // console.log(db);
         }
     })
+
+    function deleteFormula(cellObject){
+        cellObject.formula = "";
+        for(let i=0; i<cellObject.parents.length ; i++){
+            // A1 // A2
+            let parentName = cellObject.parents[i];
+            let {rowId , colId} = getRowIdColIdFromAddress(parentName);
+            let parentCellObject = db[rowId][colId];
+            //{name:"A1" , value="10" , formula:"" , childrens:["B1" , "A23" , "Z100"] , parents:[]};
+            let childrens = parentCellObject.childrens;
+            let newChildrens = childrens.filter( function(child){
+                return child != cellObject.name;
+            });
+            // ["A23" , "Z100"];
+            parentCellObject.childrens = newChildrens;
+        }
+        cellObject.parents = [];
+    }
 
     function updateChildrens(cellObject){
         let childrens = cellObject.childrens;
@@ -74,12 +104,12 @@ $(function(){
             childrenCellObject.value = newValue;
             // ui update
             $(`div[rowid=${rowId}][colid=${colId}]`).text(newValue);
-            
             // if childrenCellObject have atleast 1 children
             if(childrenCellObject.childrens.length){
                 updateChildrens(childrenCellObject);
             }
         }
+
     }
 
 
@@ -104,6 +134,7 @@ $(function(){
 
                 if(cellObject){
                     cellObjectOfFComp.childrens.push(cellObject.name);
+                    cellObject.parents.push(fComps[i]);
                 }
 
                 formula = formula.replace(fComps[i] , cellObjectOfFComp.value);
@@ -137,7 +168,8 @@ $(function(){
                     name:name,
                     value:"",
                     formula:"",
-                    childrens:[]
+                    childrens:[],
+                    parents:[]
                 }
                 row.push(cellObject);
             }
