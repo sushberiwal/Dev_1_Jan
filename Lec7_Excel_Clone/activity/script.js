@@ -14,8 +14,10 @@ $(function(){
         let rowId = Number($(this).attr("rowid")); // 1 => 2
         let colId = Number($(this).attr("colid")); // 1 => B
         let address = String.fromCharCode(colId+65) + (rowId+1);
+        let cellObject = db[rowId][colId];
         $("#address").val(address);
-        console.log(db);
+        $("#formula").val(cellObject.formula);
+        // console.log(db);
     })
 
 
@@ -29,8 +31,11 @@ $(function(){
 
         let value = $(this).text();
         if(value && cellObject.value != value){
+            // db update
             cellObject.value = value;
-            console.log(db);
+            // console.log(db);
+            // db.cellobject.childrens update hojao
+            updateChildrens(cellObject);
         }
         // value typed in cell
         // should be set in cellobject.value
@@ -40,23 +45,45 @@ $(function(){
 
     $("#formula").on("blur" , function(){
         let formula = $(this).val();
-        console.log(formula);
+        // console.log(formula);
         // get last selected cell ka object
         let rowId = $(lsc).attr("rowid");
         let colId = $(lsc).attr("colid");
         let cellObject = db[rowId][colId];
         if(formula && cellObject.formula != formula){
             cellObject.formula = formula;
-            let value = solve(formula);
+            let value = solve(formula , cellObject);
             // db update
             cellObject.value = value;
             // ui update
             $(lsc).text(value);
+            console.log(db);
         }
     })
 
+    function updateChildrens(cellObject){
+        let childrens = cellObject.childrens;
+        // A1
+        // childrens = ["B1"];
+        for(let i=0 ; i<childrens.length ; i++){
+            let {rowId , colId} = getRowIdColIdFromAddress(childrens[i]);
+            let childrenCellObject = db[rowId][colId];
+            //{name:"B1" , value:"30" , formula:"( A1 + A2 )" , childrens:[]};
+            let newValue = solve(childrenCellObject.formula);
+            // db update
+            childrenCellObject.value = newValue;
+            // ui update
+            $(`div[rowid=${rowId}][colid=${colId}]`).text(newValue);
+            
+            // if childrenCellObject have atleast 1 children
+            if(childrenCellObject.childrens.length){
+                updateChildrens(childrenCellObject);
+            }
+        }
+    }
 
-    function solve(formula){
+
+    function solve(formula , cellObject){
         // {
         // name:"B1"
         // value:""
@@ -73,6 +100,12 @@ $(function(){
                 // A1 // A2
                 let {rowId , colId} = getRowIdColIdFromAddress(fComps[i]);
                 let cellObjectOfFComp = db[rowId][colId]; // A1
+                // add self to childrens of A1 and A2
+
+                if(cellObject){
+                    cellObjectOfFComp.childrens.push(cellObject.name);
+                }
+
                 formula = formula.replace(fComps[i] , cellObjectOfFComp.value);
             }
         }
@@ -103,7 +136,8 @@ $(function(){
                 let cellObject = {
                     name:name,
                     value:"",
-                    formula:""
+                    formula:"",
+                    childrens:[]
                 }
                 row.push(cellObject);
             }
