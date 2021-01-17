@@ -10,8 +10,48 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="menu">Menu</div>
-    <div class="menu-options">Menu-options</div>
+    <div class="menu">
+        <div class="file active-menu">File</div>
+        <div class="home">Home</div>
+    </div>
+    <div class="menu-options">
+        <div class="file-menu-options">File menu options</div>
+        <div class="home-menu-options hide">
+            <div class="left">
+                <select name="font" id="font-style">
+                    <option value="">A</option>
+                    <option value="">B</option>
+                    <option value="">C</option>
+                    <option value="">D</option>
+                </select>
+                <div class="font-style">
+                    <div class="bold">B</div>
+                    <div class="underline">U</div>
+                    <div class="italic">I</div>
+                </div>
+            </div>
+            <div class="middle">
+                <select name="font-size" id="font-size">
+                    <option value="">10</option>
+                    <option value="">12</option>
+                    <option value="">14</option>
+                    <option value="">16</option>
+                    <option value="">17</option>
+                    <option value="">18</option>
+                    <option value="">19</option>
+                </select>
+                <div class="color">
+                    <input type="color" name="" id="cell-color">
+                    <input type="color" name="" id="font-color">
+                </div>
+            </div>
+            <div class="right">
+                <div class="left-align">L</div>
+                <div class="center-align">C</div>
+                <div class="right-align">R</div>
+            </div>
+        </div>
+    </div>
     <div class="address">
         <input type="text" id="address" disabled>
         <input type="text" id="formula">

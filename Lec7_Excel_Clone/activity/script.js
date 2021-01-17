@@ -21,7 +21,6 @@ $(function () {
   });
 
   // sheets logic
-
   $(".add-sheet").on("click", function () {
     // dynamically html add to dom
     sheetId++;
@@ -171,6 +170,24 @@ $(function () {
       // console.log(db);
     }
   });
+
+
+  // file // home
+  $(".menu div").on("click" , function(){
+      let menu = $(this).text();
+    //   console.log(`clicked on ${menu}`);
+    $(".active-menu").removeClass("active-menu");
+    if(menu =="File"){
+        $(".file").addClass("active-menu");
+        $(".file-menu-options").removeClass("hide");
+        $(".home-menu-options").addClass("hide");
+    }
+    else{
+        $(".home").addClass("active-menu");
+        $(".home-menu-options").removeClass("hide");
+        $(".file-menu-options").addClass("hide");
+    }
+  })
 
   function deleteFormula(cellObject) {
     cellObject.formula = "";

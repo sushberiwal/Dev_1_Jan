@@ -9,11 +9,14 @@ html,body{
 
 .menu{
     height: 40px;
-    border: 1px solid;
+    border-top: 1px solid;
+    display: flex;
+    align-items: center;
 }
 .menu-options{
     height: 60px;
-    border: 1px solid;
+    border-top: 1px solid;
+    display: flex;
 }
 .address{
     height: 40px;
@@ -99,4 +102,89 @@ html,body{
     color: white;
     padding: 5px;
     border-radius: 10px;
+}
+
+.menu div{
+    margin-left: 10px;
+    cursor: default;
+}
+
+.file{
+
+}
+
+.home{
+
+}
+.home-menu-options{
+    display: flex;
+    align-items: center;
+}
+.left{
+    min-width: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.font-style{
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+}
+.font-style div{
+    border: 1px solid lightgray;
+    min-height: 26px;
+    min-width: 35px;
+    text-align: center;
+    cursor: default;
+}
+.bold{
+
+}
+.underline{
+
+}
+.italic{
+
+}
+.middle{
+    min-width: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.color{
+
+}
+
+.right{
+    min-width: 150px;
+    display: flex;
+    justify-content: space-evenly;
+}
+.right div{
+    border: 1px solid lightgray;
+    min-width: 30px;
+    min-height: 30px;
+    text-align: center;
+    cursor: default;
+}
+.left-align{
+
+}
+.center-align{
+
+}
+.right-align{
+
+}
+
+.active-menu{
+    background: lightgreen;
+    color: white;
+    padding: 5px;
+    border-radius: 10px;
+}
+.hide{
+    display: none;
 }
