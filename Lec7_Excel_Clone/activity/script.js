@@ -6,6 +6,7 @@ $(function(){
 
     let db;
     let lsc;
+    let sheetId = 1;
     // console.log("document is loaded !!!");
     // cell pe lagao click event and run function
 
@@ -19,6 +20,46 @@ $(function(){
         $("#formula").val(cellObject.formula);
         // console.log(db);
     })
+
+    // sheets logic
+
+    $(".add-sheet").on("click" , function(){
+        // dynamically html add to dom
+        sheetId++;
+        // 2                                               
+        let sheetToBeAdded = `<div class="sheet" sid="${sheetId-1}">Sheet ${sheetId}</div>`;
+        $(".sheets-list").append(sheetToBeAdded);
+
+
+        // 2 element dom .sheet class
+        // console.log($(`div[sid=${sheetId-1}]`));
+        
+        $(`div[sid=${sheetId-1}]`).on("click" , function(){
+            // console.log("click event added on new sheet !!");
+            let isActive = $(this).hasClass("active-sheet");
+            if(!isActive){
+            // remove active-sheet
+            $(".active-sheet").removeClass("active-sheet");
+            // add active-sheet to this
+            $(this).addClass("active-sheet");
+           }
+        })
+    })
+
+
+    // if not active then add active-sheet class
+    $(".sheet").on("click" , function(){
+        let isActive = $(this).hasClass("active-sheet");
+        if(!isActive){
+            // remove active-sheet
+            $(".active-sheet").removeClass("active-sheet");
+            // add active-sheet to this
+            $(this).addClass("active-sheet");
+
+        }
+    })
+
+
 
 
     $(".cell").on("blur" , function(){

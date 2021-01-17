@@ -1,5 +1,6 @@
 *{
     box-sizing: border-box; 
+    font-family: 'Lato', sans-serif;
 }
 
 html,body{
@@ -20,7 +21,8 @@ html,body{
 }
 .sheets{
     height: 40px;
-    border: 1px solid;
+    display: flex;
+    align-items: center;
 }
 .content{
     height: calc(100vh - 180px);
@@ -40,7 +42,7 @@ html,body{
 
 .top-left-cell{
     height: 25px;
-    width: 25px;
+    width: 30px;
     background: lightgray;
 }
 
@@ -48,7 +50,7 @@ html,body{
     display: flex;
     position: absolute;
     top: 0px;
-    left: 25px;
+    left: 30px;
     background: lightgreen;
 }
 .top-row-cell{
@@ -64,11 +66,37 @@ html,body{
 .left-col-cell{
     height: 25px;
     border: 1px solid;
-    width: 25px;
+    width: 30px;
     text-align: center;
 }
 .cells{
     position: absolute;
-    left: 25px;
+    left: 30px;
     top: 25px;
+}
+
+.sheets-list{
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+.sheet{
+    margin-left: 10px;
+    border: 1px solid lightgreen;
+    padding: 5px;
+    border-radius: 10px;
+    cursor: default;
+}
+.add-sheet{
+    margin-left: 10px;
+}
+.fas{
+    font-size: 25px;
+    color: lightgreen;
+}
+.active-sheet{
+    background: lightgreen;
+    color: white;
+    padding: 5px;
+    border-radius: 10px;
 }
