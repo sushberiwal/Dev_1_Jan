@@ -17,6 +17,8 @@ window.addEventListener("resize" , function(){
 })
 
 
+let db=[];
+let redoDB = [];
 // tell canvas we want to start a new line
 // ctx.beginPath();
 
@@ -33,28 +35,48 @@ window.addEventListener("resize" , function(){
 // // actually draw a line between points
 // ctx.stroke();
 let isMouseDown = false;
+let line = [];
+
 canvas.addEventListener("mousedown" , function(e){
+    console.log(e);
     isMouseDown = true;
     let x = e.clientX;
     let y = e.clientY - canvasTop;
     // console.log(x,y);
     ctx.beginPath();
     ctx.moveTo(x,y);
-
+    let pointObject  = {
+        id:"md",
+        x ,
+        y
+    }
+    line.push(pointObject);
 })
 
 canvas.addEventListener("mousemove" , function(e){
     if(isMouseDown){
+        if(redoDB.length){
+            redoDB = [];
+        }
         let x = e.clientX;
         let y = e.clientY - canvasTop;
         // console.log(x,y);
         ctx.lineTo(x,y);
         ctx.stroke();
+        let pointObject  = {
+            id:"mm",
+            x ,
+            y
+        }
+        line.push(pointObject);
     }
 })
 
 canvas.addEventListener("mouseup" , function(e){
     isMouseDown = false;
+    db.push(line);
+    line = [];
+    console.log(db);
 })
 
 
