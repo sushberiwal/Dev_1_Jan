@@ -1,8 +1,10 @@
 const $ = require("jquery");
 
 $(function () {
-  let db;
-  let currentVisitedCells;
+  
+    
+  let db; // current db
+  let currentVisitedCells; // current Visited cells
   let lsc;
   let sheetId = 1;
   let sheetsDB = [];
@@ -61,7 +63,6 @@ $(function () {
       $(`div[rowid=${rowId}][colid=${colId}]`).text("");
     }
   }
-
   function setDB(sid) {
     // ui se htao values
     currentVisitedCells = sheetsDB[sid].visitedCells;
@@ -86,6 +87,7 @@ $(function () {
       $(".active-sheet").removeClass("active-sheet");
       // add active-sheet to this
       $(this).addClass("active-sheet");
+      
       clearUI();
       // set db
       let sid = $(this).attr("sid");
@@ -106,7 +108,7 @@ $(function () {
     // ui wali value
     let value = $(this).text();
     if (value && cellObject.value != value) {
-      if (!cellObject.visited) {
+      if(!cellObject.visited) {
         cellObject.visited = true;
         currentVisitedCells.push({ rowId, colId });
       }

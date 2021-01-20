@@ -1,0 +1,52 @@
+* {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+}
+
+.tools-content {
+  height: 100px;
+  width: 100vw;
+  /* background: lightgreen; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tools {
+  display: flex;
+
+  /* background: blueviolet; */
+
+  height: 80%;
+
+  width: 80%;
+
+  align-items: center;
+
+  justify-content: space-evenly;
+
+  border-radius: 20px;
+
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+}
+
+.tool {
+  height: 50px;
+
+  width: 80px;
+}
+
+.tool img {
+  height: 100%;
+
+  width: 100%;
+}
+
+.drawing {
+}
+
+#canvas {
+  /* background: aquamarine; */
+  /* border: 1px solid; */
+}
