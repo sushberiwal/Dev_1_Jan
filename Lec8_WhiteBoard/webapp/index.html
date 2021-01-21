@@ -27,8 +27,13 @@
                     <input type="range" name="eraserSize" id="eraser-size" min="1" max="40" value="1">
                 </div>
             </div>
-            <div class="tool"><img src="./resources-master/resources-master/NewIcons/StickyNote.svg" alt=""></div>
-            <div class="tool"><img src="./resources-master/resources-master/NewIcons/Photo.svg" alt=""></div>
+            <div class="tool" id="sticky">
+                <img src="./resources-master/resources-master/NewIcons/StickyNote.svg" alt="">
+            </div>
+            <div class="tool" id="photo">
+                <img src="./resources-master/resources-master/NewIcons/Photo.svg" alt="">
+                <input type="file" id="photo-upload">
+            </div>
             <div class="tool"><img src="./resources-master/resources-master/NewIcons/Download.svg" alt=""></div>
             <div class="tool" id="undo"><img src="./resources-master/resources-master/NewIcons/Undo.svg" alt=""></div>
             <div class="tool" id="redo"><img src="./resources-master/resources-master/NewIcons/Redo.svg" alt=""></div>
@@ -39,5 +44,7 @@
     </div>
     <script src="./script.js"></script>
     <script src="./tools.js"></script>
+    <script src="./sticky.js"></script>
+    <script src="./img.js"></script>
 </body>
 </html>
