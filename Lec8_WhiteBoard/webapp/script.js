@@ -13,7 +13,8 @@ canvas.width = window.innerWidth;
 
 window.addEventListener("resize" , function(){
     canvas.height = window.innerHeight - canvasTop;
-    canvas.width = window.innerWidth;        
+    canvas.width = window.innerWidth; 
+    redrawLines();       
 })
 
 
