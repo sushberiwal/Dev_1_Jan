@@ -5,20 +5,21 @@ let ctx = canvas.getContext("2d");
 // console.log(ctx);
 
 // object destructuring
-let { top : canvasTop  } = canvas.getBoundingClientRect();
-
+let { top: canvasTop } = canvas.getBoundingClientRect();
 
 canvas.height = window.innerHeight - canvasTop;
 canvas.width = window.innerWidth;
 
-window.addEventListener("resize" , function(){
-    canvas.height = window.innerHeight - canvasTop;
-    canvas.width = window.innerWidth; 
-    redrawLines();       
-})
+window.addEventListener("resize", function () {
+  canvas.height = window.innerHeight - canvasTop;
+  canvas.width = window.innerWidth;
+  redrawLines();
+});
 
+ctx.lineCap = "round";
+ctx.lineJoin = "round";
 
-let db=[];
+let db = [];
 let redoDB = [];
 // tell canvas we want to start a new line
 // ctx.beginPath();
@@ -38,46 +39,46 @@ let redoDB = [];
 let isMouseDown = false;
 let line = [];
 
-canvas.addEventListener("mousedown" , function(e){
-    console.log(e);
-    isMouseDown = true;
+canvas.addEventListener("mousedown", function (e) {
+  console.log(e);
+  isMouseDown = true;
+  let x = e.clientX;
+  let y = e.clientY - canvasTop;
+  // console.log(x,y);
+  ctx.beginPath();
+  ctx.moveTo(x, y);
+  let pointObject = {
+    id: "md",
+    x,
+    y,
+    lineWidth: ctx.lineWidth,
+    strokeStyle: ctx.strokeStyle,
+  };
+  line.push(pointObject);
+});
+
+canvas.addEventListener("mousemove", function (e) {
+  if (isMouseDown) {
+    if (redoDB.length) {
+      redoDB = [];
+    }
     let x = e.clientX;
     let y = e.clientY - canvasTop;
     // console.log(x,y);
-    ctx.beginPath();
-    ctx.moveTo(x,y);
-    let pointObject  = {
-        id:"md",
-        x ,
-        y
-    }
+    ctx.lineTo(x, y);
+    ctx.stroke();
+    let pointObject = {
+      id: "mm",
+      x,
+      y
+    };
     line.push(pointObject);
-})
+  }
+});
 
-canvas.addEventListener("mousemove" , function(e){
-    if(isMouseDown){
-        if(redoDB.length){
-            redoDB = [];
-        }
-        let x = e.clientX;
-        let y = e.clientY - canvasTop;
-        // console.log(x,y);
-        ctx.lineTo(x,y);
-        ctx.stroke();
-        let pointObject  = {
-            id:"mm",
-            x ,
-            y
-        }
-        line.push(pointObject);
-    }
-})
-
-canvas.addEventListener("mouseup" , function(e){
-    isMouseDown = false;
-    db.push(line);
-    line = [];
-    console.log(db);
-})
-
-
+canvas.addEventListener("mouseup", function (e) {
+  isMouseDown = false;
+  db.push(line);
+  line = [];
+  console.log(db);
+});

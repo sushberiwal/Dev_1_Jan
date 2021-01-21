@@ -5,6 +5,44 @@ let eraser = document.querySelector("#eraser");
 let pencilOptions = document.querySelector("#pencil-options");
 let eraserOptions = document.querySelector("#eraser-options");
 
+let pencilSizeInput = document.querySelector("#pencil-size");
+let eraserSizeInput = document.querySelector("#eraser-size");
+let pencilColors = document.querySelectorAll(".pencil-colors div");
+
+
+// console.log(pencilColors);
+
+let pencilSize = 1;
+let eraserSize = 1;
+
+
+
+
+for(let i=0 ; i<pencilColors.length ; i++){
+    pencilColors[i].addEventListener("click" , function(e){
+        console.log(e);
+        // if(e.target.classList.contains("blue")
+        let color = e.target.classList.value;
+        ctx.strokeStyle=color;
+    })
+}
+
+
+
+pencilSizeInput.addEventListener("change" , function(e){
+    let val = e.target.value;
+    ctx.lineWidth = val;
+    pencilSize = val;
+})
+eraserSizeInput.addEventListener("change" , function(e){
+    let val = e.target.value;
+    ctx.lineWidth = val;
+    eraserSize = val;
+})
+
+
+
+
 pencil.addEventListener("click" , function(){
     // console.log("pencil clicked !!");
     if(pencil.classList.contains("active-tool")){
@@ -21,6 +59,8 @@ pencil.addEventListener("click" , function(){
     }
     else{
         // pencil active nhi hai
+        ctx.strokeStyle = "black";
+        ctx.lineWidth = pencilSize;
         eraser.classList.remove("active-tool");
         eraserOptions.classList.add("hide");
         pencil.classList.add("active-tool");
@@ -40,6 +80,8 @@ eraser.addEventListener("click" , function(){
         }
     }
     else{
+        ctx.strokeStyle = "white";
+        ctx.lineWidth = eraserSize;
         // eraser active nhi h
         pencil.classList.remove("active-tool");
         pencilOptions.classList.add("hide");
@@ -68,6 +110,8 @@ function redoLines(){
         for(let j=0 ; j<line.length ; j++){
             let pointObject = line[j];
             if(pointObject.id == "md"){
+                ctx.strokeStyle = pointObject.strokeStyle;
+                ctx.lineWidth = pointObject.lineWidth;
                 ctx.beginPath();
                 ctx.moveTo(pointObject.x , pointObject.y);
             }
@@ -99,6 +143,8 @@ function redrawLines(){
         for(let j=0 ; j<line.length ; j++){
             let pointObject = line[j];
             if(pointObject.id == "md"){
+                ctx.strokeStyle = pointObject.strokeStyle;
+                ctx.lineWidth = pointObject.lineWidth;
                 ctx.beginPath();
                 ctx.moveTo(pointObject.x , pointObject.y);
             }
