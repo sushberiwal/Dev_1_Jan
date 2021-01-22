@@ -132,6 +132,12 @@
   border-bottom-left-radius: 10px;
 }
 
+.sticky-image{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
 .active-tool {
   background: lightgray;
   border-radius: 50%;
