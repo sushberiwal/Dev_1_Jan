@@ -1,0 +1,150 @@
+* {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+}
+
+.tools-content {
+  height: 100px;
+  /* width: 100vw; */
+  /* background: lightgreen; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tools {
+  display: flex;
+  /* background: blueviolet; */
+  height: 80%;
+  width: 80%;
+  align-items: center;
+  justify-content: space-evenly;
+  border-radius: 20px;
+  box-shadow: 0 1px 3rem rgba(0, 0, 0, 0.175);
+}
+
+.tool {
+  height: 50px;
+  width: 80px;
+  position: relative;
+}
+
+.tool img {
+  height: 100%;
+  width: 100%;
+}
+
+.drawing {
+}
+.canvas-content {
+  height: calc(100vh - 100px);
+}
+
+#canvas {
+  /* background: aquamarine; */
+  /* border: 1px solid; */
+}
+
+.tool-options {
+  height: 100px;
+  width: 150px;
+  /* background: lightcyan; */
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  position: absolute;
+  top: 70px;
+  left: -30px;
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+}
+#pencil-size {
+}
+.pencil-colors {
+  display: flex;
+
+  width: 100%;
+
+  justify-content: space-evenly;
+}
+.pencil-colors div {
+  height: 25px;
+
+  width: 25px;
+
+  border-radius: 50%;
+}
+.red {
+  background: red;
+}
+.black {
+  background: black;
+}
+.blue {
+  background: blue;
+}
+.yellow {
+  background: yellow;
+}
+.sticky {
+  position: absolute;
+  top: 250px;
+  left: 300px;
+  height: 150px;
+  width: 200px;
+  /* background: aqua; */
+}
+.sticky-nav {
+  height: 15%;
+  background: lightsteelblue;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.minimize {
+  height: 15px;
+  width: 15px;
+  background: blue;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+.close {
+  height: 15px;
+  width: 15px;
+  background: red;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+.sticky-content {
+  height: 85%;
+  /* background: crimson; */
+}
+
+#sticky-text {
+  height: 100%;
+  width: 100%;
+  outline: none;
+  border: 1px solid lightgray;
+  border-bottom-left-radius: 10px;
+}
+
+.sticky-image{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.active-tool {
+  background: lightgray;
+  border-radius: 50%;
+  height: 60px;
+  padding: 6px;
+}
+
+.hide {
+  display: none;
+}

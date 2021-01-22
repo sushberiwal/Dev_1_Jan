@@ -55,6 +55,7 @@ canvas.addEventListener("mousedown", function (e) {
     strokeStyle: ctx.strokeStyle,
   };
   line.push(pointObject);
+  socket.emit("md" , pointObject); 
 });
 
 canvas.addEventListener("mousemove", function (e) {
@@ -73,6 +74,7 @@ canvas.addEventListener("mousemove", function (e) {
       y
     };
     line.push(pointObject);
+    socket.emit("mm" , pointObject);
   }
 });
 
@@ -80,5 +82,5 @@ canvas.addEventListener("mouseup", function (e) {
   isMouseDown = false;
   db.push(line);
   line = [];
-  console.log(db);
+  socket.emit("mu");
 });
