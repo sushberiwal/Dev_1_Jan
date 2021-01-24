@@ -45,11 +45,13 @@
 }
 .chat {
   /* height: 35px; */
-  margin: 10px; /* text-align: center; */
+  margin: 10px;
+  /* text-align: center; */
   display: flex;
   align-items: center;
   border-radius: 10px;
   padding: 5px;
+  max-width: 300px;
 }
 .left {
   background: white;
@@ -61,6 +63,24 @@
   color: white;
   float: right;
   clear: both;
+}
+.join {
+  float: left;
+  clear: both;
+  background: darkviolet;
+  color: white;
+  width: 90%;
+  max-width: none;
+  justify-content: center;
+}
+.leave {
+  float: left;
+  clear: both;
+  background: red;
+  color: white;
+  width: 90%;
+  max-width: none;
+  justify-content: center;
 }
 .chat-type-box {
   background: white;
@@ -75,7 +95,7 @@
 
   justify-content: space-evenly;
 }
-#send-chat {
+#chat {
   outline: none;
   border: none;
   background: #ebeef2;
@@ -83,7 +103,8 @@
   width: 80%;
   border-radius: 10px;
   color: lightslategray;
-  font-size: 20px;
+  font-size: 17px;
+  padding: 10px;
 }
 .send {
 }
