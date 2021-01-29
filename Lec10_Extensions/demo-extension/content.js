@@ -12,8 +12,10 @@ function changeImages(){
     }
 }
 
-
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-   changeImages();
-   sendResponse("images have been changed !!");
+// event listener
+chrome.runtime.onMessage.addListener(function(message, sender, cb) {
+    if(message.greeting == "changeImages"){
+        changeImages();
+        cb("images have been changed !!");
+    }
 });
