@@ -44,7 +44,15 @@ siteName.addEventListener("keyup" , function(e){
 blockBtn.addEventListener("click" , function(){
     let site = siteName.value;
     if(site){
+        for(let i=0 ; i<localBlockList.length ; i++){
+            if(localBlockList[i].site.includes(site) || site.includes(localBlockList[i].site) ){
+                alert("Site Already Blocked !")
+                return;
+            }
+        }
+        
         addBlockSitesToUi(site);
+        localBlockList.push({site});
         siteName.value = "";
         chrome.runtime.sendMessage( {type:"Add" , site}, function(response) {
             console.log(response);
