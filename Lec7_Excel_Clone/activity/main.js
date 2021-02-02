@@ -19,7 +19,7 @@ function createWindow () {
       height: 600,
       webPreferences: {
         nodeIntegration: true, // node enabled !,
-        
+        enableRemoteModule:true // to use dialog object
       }
     })
   

@@ -1,4 +1,6 @@
 const $ = require("jquery");
+const dialog = require("electron").remote.dialog;
+const fs = require("fs");
 
 $(function () {
   
@@ -11,6 +13,67 @@ $(function () {
   // console.log("document is loaded !!!");
   // cell pe lagao click event and run function
 
+// new // open // save
+  $(".new").on("click" , function(){
+    console.log("new clicked !!");
+    // clean UI
+    clearUI();
+     // empty sheets
+     $(".sheets-list").html("");
+    // sheetsDb empty
+    sheetsDB = [];
+    // sheetId init
+    sheetId = 0;
+    // add a single db object to sheetsDB
+    addDBToSheetsDB();
+    // add a single Sheet to sheet list
+    addSheetToSheetList();
+  })
+
+  $(".open").on("click" , function(){
+    //open the dialog box
+    let paths = dialog.showOpenDialogSync();
+    console.log(paths);
+    if(paths){
+      let path = paths[0];
+      // clear the UI
+      clearUI();
+      // empty sheets
+      $(".sheets-list").html("");
+
+      let openedSheetsDB = JSON.parse(fs.readFileSync(path));
+      console.log(openedSheetsDB);
+
+      // sheetsDB set , db set , visited cells set , sheetId set
+      sheetsDB = openedSheetsDB;
+      db = sheetsDB[0].db;
+      currentVisitedCells = sheetsDB[0].visitedCells;
+      sheetId = 0;
+
+      for(let i=0 ; i<sheetsDB.length ; i++){
+        addSheetToSheetList();
+      }
+      // setUI according to current DB
+      setUI();
+    }
+
+
+
+
+  })
+
+  $(".save").on("click" , function(){
+    console.log("save clicked !!");
+    let path = dialog.showSaveDialogSync();
+    console.log(path);
+    if(path){
+      fs.writeFileSync(path , JSON.stringify(sheetsDB) );
+      alert("Sheets Saved Succesfully !");
+    }
+  })
+
+
+
   $(".cell").on("click", function () {
     console.log("cell clicked !!!!");
     let rowId = Number($(this).attr("rowid")); // 1 => 2
@@ -22,36 +85,49 @@ $(function () {
     // console.log(db);
   });
 
+  function addSheetToSheetList(){
+     // dynamically html add to dom
+     sheetId++;
+     // 2
+
+     let sheetToBeAdded;
+     if(sheetId == 1){
+      sheetToBeAdded = `<div class="sheet active-sheet" sid="${
+         sheetId - 1
+       }">Sheet ${sheetId}</div>`;
+     }
+     else{
+      sheetToBeAdded = `<div class="sheet" sid="${
+        sheetId - 1
+      }">Sheet ${sheetId}</div>`;
+     }
+
+     $(".sheets-list").append(sheetToBeAdded);
+     // 2 element dom .sheet class
+     // console.log($(`div[sid=${sheetId-1}]`));
+     $(`div[sid=${sheetId - 1}]`).on("click", function () {
+       // console.log("click event added on new sheet !!");
+       let isActive = $(this).hasClass("active-sheet");
+       if (!isActive) {
+         // remove active-sheet
+         $(".active-sheet").removeClass("active-sheet");
+         // add active-sheet to this
+         $(this).addClass("active-sheet");
+ 
+         // clear ui
+         clearUI();
+         // set db
+         let sid = $(this).attr("sid");
+         setDB(sid);
+         // set ui
+         setUI();
+       }
+     });
+  }
+
   // sheets logic
   $(".add-sheet").on("click", function () {
-    // dynamically html add to dom
-    sheetId++;
-    // 2
-    let sheetToBeAdded = `<div class="sheet" sid="${
-      sheetId - 1
-    }">Sheet ${sheetId}</div>`;
-    $(".sheets-list").append(sheetToBeAdded);
-    // 2 element dom .sheet class
-    // console.log($(`div[sid=${sheetId-1}]`));
-    $(`div[sid=${sheetId - 1}]`).on("click", function () {
-      // console.log("click event added on new sheet !!");
-      let isActive = $(this).hasClass("active-sheet");
-      if (!isActive) {
-        // remove active-sheet
-        $(".active-sheet").removeClass("active-sheet");
-        // add active-sheet to this
-        $(this).addClass("active-sheet");
-
-        // clear ui
-        clearUI();
-        // set db
-        let sid = $(this).attr("sid");
-        setDB(sid);
-        // set ui
-        setUI();
-      }
-    });
-
+    addSheetToSheetList();
     // new db add in sheetsDB
     addDBToSheetsDB();
   });

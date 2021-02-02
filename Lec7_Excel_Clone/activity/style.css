@@ -116,6 +116,15 @@ html,body{
 .home{
 
 }
+
+.file-menu-options{
+    display: flex;
+    align-items: center;
+    width: 20%;
+    justify-content: space-around;
+    cursor: default;
+}
+
 .home-menu-options{
     display: flex;
     align-items: center;
