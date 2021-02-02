@@ -15,6 +15,7 @@ $(function () {
 
 // new // open // save
   $(".new").on("click" , function(){
+    // window.open();
     console.log("new clicked !!");
     // clean UI
     clearUI();
@@ -29,7 +30,6 @@ $(function () {
     // add a single Sheet to sheet list
     addSheetToSheetList();
   })
-
   $(".open").on("click" , function(){
     //open the dialog box
     let paths = dialog.showOpenDialogSync();
@@ -61,7 +61,6 @@ $(function () {
 
 
   })
-
   $(".save").on("click" , function(){
     console.log("save clicked !!");
     let path = dialog.showSaveDialogSync();
@@ -72,6 +71,83 @@ $(function () {
     }
   })
 
+
+  // bold // underline // italic
+
+  $(".font-style div").on("click" , function(){
+    if(lsc){
+      let fontStyle = $(this).attr("class");
+      console.log(fontStyle);
+  
+      let rowId = $(lsc).attr("rowid");
+      let colId = $(lsc).attr("colid");
+  
+      let cellObject = db[rowId][colId];
+      
+  
+      if(fontStyle == "underline"){
+        // toggle => underline => normal => underline
+        $(lsc).css("text-decoration", cellObject.fontStyles.underline ? "none" : "underline" );
+      }
+      else if(fontStyle == "italic"){
+        $(lsc).css("font-style" , cellObject.fontStyles.italic ? "normal"  : "italic");
+      }
+      else{
+        $(lsc).css("font-weight" , cellObject.fontStyles.bold ? "normal" : "bold");
+      }
+      
+      // db changes
+      cellObject.fontStyles[fontStyle] = !cellObject.fontStyles[fontStyle];
+      
+      // cellObject.fontStyles[fontStyle] ? $(this).addClass("active-font-style") :$(this).removeClass("active-font-style") 
+    }
+  })
+
+
+  // left // centre // right
+  $(".right div").on("click" , function(){
+    if(lsc){
+      let rowId = $(lsc).attr("rowid");
+      let colId = $(lsc).attr("colid");
+      let cellObject = db[rowId][colId];
+      
+      let alignment = $(this).text();
+      if(alignment == "L"){
+        $(lsc).css("text-align" , "left");
+        cellObject.textAlign = "left";
+      }
+      else if(alignment == "C"){
+        $(lsc).css("text-align" , "center");
+        cellObject.textAlign = "center";
+      }
+      else{
+        $(lsc).css("text-align" , "right");
+        cellObject.textAlign = "right";
+      }
+    }
+  })
+
+  // cell color // font color
+  $("#cell-color").on("change" , function(){
+    let cellColor = $(this).val();
+    if(lsc){
+      let rowId = $(lsc).attr("rowid");
+      let colId = $(lsc).attr("colid");
+      let cellObject = db[rowId][colId];
+      $(lsc).css("background" , cellColor);
+      cellObject.color.cellColor = cellColor;
+    }
+  })
+  $("#font-color").on("change" , function(){
+    let fontColor = $(this).val();
+    if(lsc){
+      let rowId = $(lsc).attr("rowid");
+      let colId = $(lsc).attr("colid");
+      let cellObject = db[rowId][colId];
+      $(lsc).css("color" , fontColor);
+      cellObject.color.fontColor = fontColor;
+    }
+  })
 
 
   $(".cell").on("click", function () {
@@ -136,7 +212,8 @@ $(function () {
     for (let i = 0; i < currentVisitedCells.length; i++) {
       let rowId = currentVisitedCells[i].rowId;
       let colId = currentVisitedCells[i].colId;
-      $(`div[rowid=${rowId}][colid=${colId}]`).text("");
+      $(`div[rowid=${rowId}][colid=${colId}]`).html("");
+      $(`div[rowid=${rowId}][colid=${colId}]`).removeAttr("style");
     }
   }
   function setDB(sid) {
@@ -151,6 +228,7 @@ $(function () {
       let rowId = currentVisitedCells[i].rowId;
       let colId = currentVisitedCells[i].colId;
       let cellObject = db[rowId][colId];
+      // cellCOlor , fontColor , alignment , bold , underline , italic
       $(`div[rowid=${rowId}][colid=${colId}]`).text(cellObject.value);
     }
   }
@@ -360,6 +438,10 @@ $(function () {
           formula: "",
           childrens: [],
           parents: [],
+          visited: false,
+          fontStyles : {bold : false , italic : false , underline : false},
+          textAlign : "left" ,
+          color : {cellColor : "white" , fontColor : "black"}
         };
         row.push(cellObject);
       }
@@ -385,6 +467,9 @@ $(function () {
           childrens: [],
           parents: [],
           visited: false,
+          fontStyles : {bold : false , italic : false , underline : false},
+          textAlign : "left",
+          color : {cellColor : "white" , fontColor : "black"}
         };
         row.push(cellObject);
       }

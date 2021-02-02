@@ -197,3 +197,6 @@ html,body{
 .hide{
     display: none;
 }
+.active-font-style{
+    border: 1px solid lightgreen !important;
+}
