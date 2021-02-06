@@ -9,6 +9,7 @@ const app = express();
 
 
 // for all the user related functions navigate to userRouter;
+//localhost:3000/api/user post method
 app.use("/api/user" , userRouter);
 
 
