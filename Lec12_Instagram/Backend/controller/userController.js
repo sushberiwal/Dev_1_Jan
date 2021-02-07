@@ -6,6 +6,9 @@ const userModel = require("../model/userModel");
 // update user by id
 // delete by id
 
+// db => path
+// image save => backend public folder me
+
 async function createUser(req, res) {
   try {
     let userObject = req.body;
@@ -93,6 +96,7 @@ async function deleteUserById(req, res) {
         })
     }
 }
+
 
 module.exports.createUser = createUser;
 module.exports.getAllUsers = getAllUsers;
