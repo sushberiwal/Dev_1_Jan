@@ -16,6 +16,10 @@ app.use("/api/user" , userRouter);
 
 
 
+// app.get("/api/user/:id" , function(req , res){
+//     console.log(req.params.id);
+// })
+
 
 
 
