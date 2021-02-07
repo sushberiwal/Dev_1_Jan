@@ -1,22 +1,48 @@
 const userModel = require("../model/userModel");
 
 
-function createUser(req , res){
-    // console.log("Inside create User function !!!");
-    userModel.create({
-        name:"steve" ,
-        username:"wintersoldier",
-        bio:"iamcaptain",
-        email:"steve@gmail.com",
-        password:"1231213"
-    }).then(function(createdUser){
+// createUser
+// get all users
+// get by id
+// update user by id
+// delete by id
+
+
+
+async function createUser(req , res){
+    try{
+        let userObject = req.body;
+        let userCreated = await userModel.create(userObject); 
         res.json({
-            createdUser
+            message:"Succesfully created User !",
+            userCreated
         })
-    })
+    }
+    catch(error){
+        res.json({
+            message:"Failed to create User !",
+            error
+        })
+    }
+}
+
+
+function getAllUsers(req , res){
+}
+
+function getUserById(req ,res){
+}
+function updateUserById(req , res){
+}
+function deleteUserById(req , res){
 }
 
 
 module.exports.createUser = createUser;
+module.exports.getAllUsers = getAllUsers;
+module.exports.getUserById = getUserById;
+module.exports.updateUserById = updateUserById;
+module.exports.deleteUserById = deleteUserById;
+
 
 
