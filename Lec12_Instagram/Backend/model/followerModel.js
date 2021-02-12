@@ -10,7 +10,16 @@ let followerSchema = mongoose.Schema({
         type:String,
         required:true
     }
-})
+});
+
+// followerSchema.index({
+//     uid: 1,
+//     followerId: 1,
+//   }, {
+//     unique: true,
+//   });
+
+
 
 
 let followerModel = mongoose.model('follower' , followerSchema);

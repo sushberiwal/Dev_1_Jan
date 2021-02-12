@@ -14,7 +14,16 @@ let followingSchema = mongoose.Schema({
         type : Boolean ,
         default:true
     }
-})
+});
+
+
+// followingSchema.index({
+//     uid: 1,
+//     followId: 1,
+//   }, {
+//     unique: true,
+//   });
+
 
 
 let followingModel = mongoose.model('following' , followingSchema);

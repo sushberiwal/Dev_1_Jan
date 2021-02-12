@@ -40,4 +40,32 @@ async function sendRequest(req, res) {
   }
 }
 
+
+async function acceptRequest(req , res){
+    try{
+        let {uid , toBeAccepted} = req.body;
+        // change in following document
+        let doc = await followingModel.find({uid:toBeAccepted , followId:uid}).exec();
+        console.log(doc);
+        doc[0].isAccepted = true;
+        await doc[0].save();
+        await followerModel.create({
+            uid ,
+            followerId: toBeAccepted ,
+        });
+        res.json({
+            message:"Request Accepted !"
+        })
+        // add in follower collection
+    }
+    catch(error){
+        res.json({
+            message:"Failed to accept request !!",
+            error
+        })
+    }
+}
+
+
 module.exports.sendRequest = sendRequest;
+module.exports.acceptRequest = acceptRequest;
