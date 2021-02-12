@@ -90,9 +90,44 @@ async function pendingRequests(req , res){
 
 }
 
+async function deleteRequest(req , res){
+
+}
+
+async function cancelRequest(req , res){
+
+}
+
+async function deleteFollowing(req , res){
+
+}
+
+async function deleteFollower(req , res){
+
+}
+
+async function getAllFollowing(req , res){
+
+}
+
+async function getAllFollowers(req , res){
+
+}
+
+async function getSuggestions(req , res){
+
+}
+
 
 
 
 module.exports.sendRequest = sendRequest;
 module.exports.acceptRequest = acceptRequest;
 module.exports.pendingRequests = pendingRequests;
+module.exports.deleteRequest = deleteRequest;
+module.exports.cancelRequest = cancelRequest;
+module.exports.deleteFollowing = deleteFollowing;
+module.exports.deleteFollower = deleteFollower;
+module.exports.getAllFollowing = getAllFollowing;
+module.exports.getAllFollowers = getAllFollowers;
+module.exports.getSuggestions = getSuggestions;
