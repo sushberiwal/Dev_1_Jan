@@ -12,6 +12,12 @@ const userModel = require("../model/userModel");
 async function createUser(req, res) {
   try {
     let userObject = req.body;
+    console.log(userObject);
+    if(req.file){
+      let profilePicPath = req.file.destination.substring(6)+"/"+req.file.filename; 
+      userObject.profilePic = profilePicPath;
+      console.log(userObject);
+    }
     let userCreated = await userModel.create(userObject);
     res.json({
       message: "Succesfully created User !",
@@ -63,6 +69,11 @@ async function updateUserById(req, res) {
     
     for (let key in updateObject) {
       user[key] = updateObject[key];
+    }
+
+    if(req.file){
+      let profilePicPath = req.file.destination.substring(6)+"/"+req.file.filename; 
+      user.profilePic = profilePicPath;
     }
 
     let updatedUser = await user.save();

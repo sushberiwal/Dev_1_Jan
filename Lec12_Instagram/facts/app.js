@@ -22,9 +22,10 @@ const fileFilter = function(req, file, cb){
     if (file.mimetype == 'image/jpeg' || file.mimetype == 'image/png' || file.mimetype == 'image/jpg'  ) {
         cb(null, true); // accept file is true passed 
     } else {
-        cb(null, false); // reject file
+        cb(null, false); // reject fileb
     }
 }
+
 
 const upload = multer({ storage: storage , fileFilter : fileFilter });
 
