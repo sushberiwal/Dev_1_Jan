@@ -39,8 +39,6 @@ async function sendRequest(req, res) {
       })
   }
 }
-
-
 async function acceptRequest(req , res){
     try{
         let {uid , toBeAccepted} = req.body;
@@ -65,7 +63,36 @@ async function acceptRequest(req , res){
         })
     }
 }
+async function pendingRequests(req , res){
+    try{
+        let {uid} = req.params;
+        console.log(uid);
+        let docs = await followingModel.find({followId:uid , isAccepted:false}).exec();
+        console.log(docs);
+        let requests=[];
+        for(let i=0 ; i<docs.length ; i++){
+            let uid = docs[i].uid;
+            let user = await userModel.findById(uid);
+            requests.push(user);
+        }
+        console.log(requests);
+        res.json({
+            message:"Succesfully got pending lists",
+            requests
+        })
+    }
+    catch(error){
+        res.json({
+            message:"Failed to get request list !!",
+            error
+        })
+    }
+
+}
+
+
 
 
 module.exports.sendRequest = sendRequest;
 module.exports.acceptRequest = acceptRequest;
+module.exports.pendingRequests = pendingRequests;
