@@ -31,7 +31,6 @@ let obj = {
       console.log("Inside call me");
       console.log(this);
     };
-    
     callMe();
   },
 };
