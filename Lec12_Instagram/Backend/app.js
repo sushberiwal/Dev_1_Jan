@@ -24,6 +24,9 @@ app.use("/api/user" , userRouter);
 // localhost:3000/api/request
 app.use("/api/request" , requestRouter);
 
+
+// app.use("/api/posts" , postRouter);
+
 app.listen(3000 , function(){
     console.log("server started at port 3000 !!");
 })

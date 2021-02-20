@@ -93,13 +93,17 @@ async function pendingRequests(req, res) {
   }
 }
 
-async function deleteRequest(req, res) {}
+async function deleteRequest(req, res) {
+}
 
-async function cancelRequest(req, res) {}
+async function cancelRequest(req, res) {
+}
 
-async function deleteFollowing(req, res) {}
+async function deleteFollowing(req, res) {
+}
 
-async function deleteFollower(req, res) {}
+async function deleteFollower(req, res) {
+}
 
 // promisfied function => await
 // async function => await
@@ -187,6 +191,7 @@ async function getSuggestions(req, res) {
             }
         }
     }
+    console.log(checkList);
     res.json({
         message:"Succesfully got all suggestions !",
         suggestions
