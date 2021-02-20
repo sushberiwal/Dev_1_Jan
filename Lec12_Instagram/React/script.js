@@ -1,4 +1,4 @@
-let names=["penny" , "howard" , "leaonard" , "sheldon" , "rajesh" , "akjsf"];
+let names=["penny" , "howard" , "leaonard" , "sheldon" , "rajesh"];
 
 // sfc => stateless functional component
 function Hello(props){
@@ -13,8 +13,8 @@ function Hello(props){
 // i want to render multiple hello components
 function BigHello(){
     return <React.Fragment>
-        {names.map( function(name){
-            return <Hello name={name}></Hello>
+        {names.map(function(name){
+            return <Hello name={name} key={name}></Hello>
         })}
         </React.Fragment>
 }
