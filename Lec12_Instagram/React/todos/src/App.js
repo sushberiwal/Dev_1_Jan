@@ -14,6 +14,12 @@ class App extends Component {
   };
 
 
+  addTodo = (todo)=>{
+    this.setState({
+      todos : [ ...this.state.todos ,  { id:this.state.todos.length+1 , todo:todo }   ]
+    })
+  }
+
   deleteTodo = (id)=>{
     let filteredTodos = this.state.todos.filter( todoObj =>{
       return todoObj.id != id;
@@ -27,7 +33,7 @@ class App extends Component {
   render() {
     return (
       <div className="container">
-        <InputBox />
+        <InputBox addTodo={this.addTodo}/>
         <Todos todos={this.state.todos} deleteTodo = {this.deleteTodo} />
       </div>
       
