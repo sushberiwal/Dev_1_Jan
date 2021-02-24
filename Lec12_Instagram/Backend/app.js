@@ -3,7 +3,7 @@
 const express = require("express");
 const requestRouter = require("./router/requestRouter");
 const userRouter = require("./router/userRouter");
-
+const postRouter = require("./router/postRouter");
 const app = express();
 
 app.use(express.static("public"));
@@ -16,8 +16,10 @@ app.use(  express.json() );
 //localhost:3000/api/user post method
 app.use("/api/user" , userRouter);
 
+
+
 // for all the post related functions 
-// app.use("/api/post" , postRouter);
+app.use("/api/post" , postRouter);
 
 
 // for all the functions
