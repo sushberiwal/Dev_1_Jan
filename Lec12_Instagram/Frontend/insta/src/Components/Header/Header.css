@@ -1,0 +1,36 @@
+.header {
+  background: white;
+  border-bottom: 1px solid lightgray;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 50px;
+}
+.logo {
+}
+
+.logo img {
+}
+
+.search-box {
+}
+.search-box input {
+    background: #FAFAFA;
+    outline: none;
+    border: none;
+}
+
+.nav-links {
+  width: 30%;
+}
+
+.nav-links ul {
+  display: flex;
+  list-style: none;
+  justify-content: space-around;
+}
+.nav-links ul li {
+}
+.nav-links ul li a {
+  text-decoration: none;
+}
