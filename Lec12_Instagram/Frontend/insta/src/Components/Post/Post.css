@@ -68,7 +68,7 @@
     align-items: center;
     background: white;
 }
-#comment{
+.comment{
     width: 90%;
     height: 80%;
     border: none;

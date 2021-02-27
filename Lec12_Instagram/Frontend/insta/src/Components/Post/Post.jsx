@@ -66,7 +66,7 @@ class Post extends Component {
             Comments
           </div>
           <div className="post-comment-box">
-            <input type="text" name="" id="comment" placeholder="Add a comment..."/>
+            <input type="text" name="" className="comment" placeholder="Add a comment..."/>
             <div className="post-comment-btn">POST</div>
           </div>
         </div>
