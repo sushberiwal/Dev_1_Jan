@@ -1,12 +1,14 @@
+import axios from "axios";
 import React, { Component } from "react";
+import "./Post.css";
 
 class Post extends Component {
   state = {
     userPhoto:"",    
     username:"",
     caption:"",
-    postPhoto:"",
-    comment:[],
+    postImage:"",
+    comments:[],
     likes:[],
   };
 
@@ -20,23 +22,54 @@ class Post extends Component {
   // uid:"601f7203fbe1d84480f5ac3f"
 
   componentDidMount(){
-      // props => post => caption
-      // uid se user fetch
-      // this.setState({
-
-    //   })
+    let postUserUid = this.props.post.uid;
+    let post = this.props.post;
+    axios.get(`/api/user/${postUserUid}`).then( obj =>{
+      let postUser = obj.data.user;
+      this.setState({
+        userPhoto : postUser.profilePic ,
+        username : postUser.username ,
+        caption : post.caption,
+        postImage : post.postImage,
+        comments : post.comments ,
+        likes :  post.likes
+      })    
+    })
   }
 
   render() {
+    let {userPhoto , username , caption , postImage , comments , likes} = this.state;
     return (
       <div className="post">
-        {/* photo -> username */}
-        {/* post photo */}
-        {/* like icons */}
-        {/* likes count */}
-        {/* username -> caption */}
-        {/* comments list */}
-        {/* comment input */}
+        <div className="post-header">
+          <div className="post-userphoto">
+            <img src={userPhoto} alt="user.png"/>
+          </div>
+          <div className="post-username">
+            {username}
+          </div>
+        </div>
+        <div className="post-body">
+          <div className="postImage">
+            <img src={postImage} alt=""/>
+          </div>
+          <div className="post-actions">
+            <div className="like">Like</div>
+            <div className="comment">Comment</div>
+          </div>
+          <div className="likes-count">1231 likes</div>
+          <div className="post-details">
+            <div className="post-username"> {username} </div>
+            <div className="post-caption">{caption}</div>
+          </div>
+          <div className="post-comments">
+            Comments
+          </div>
+          <div className="post-comment-box">
+            <input type="text" name="" id="comment" placeholder="Add a comment..."/>
+            <div className="post-comment-btn">POST</div>
+          </div>
+        </div>
       </div>
     );
   }
