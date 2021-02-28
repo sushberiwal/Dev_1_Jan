@@ -15,6 +15,26 @@ class Settings extends Component {
 
   fileInput = React.createRef();
 
+  componentDidMount(){  
+    //         bio: "I am Billionaire"
+  // email: "imtony@gmail.com"
+  // isPublic: true
+  // name: "Tony"
+  // password: "123456789"
+  // profilePic: "/images/users/1613135822255.jpeg"
+  // username: "ironman"
+  // __v: 0
+  // _id: "60267fcea6fc854b381626e5"
+  let {name , username , bio , email , password , profilePic} = this.props.user;
+    this.setState({
+      name,
+      username,
+      bio,
+      email,
+      password,
+      profilePic
+    }) 
+}
   onChangeHandler = (e) => {
     let type = e.target.id; // name , username , email , password
     let value = e.target.value; // abcd
@@ -22,13 +42,11 @@ class Settings extends Component {
       [type]: value,
     });
   };
-
   onEditHandler = () =>{
       this.setState({
           disabled:false
       })
   }
-
   onCancelHandler = () =>{
     let {name , username , bio , email , password , profilePic} = this.props.user;
     this.setState({
@@ -41,29 +59,6 @@ class Settings extends Component {
       disabled:true
     }) 
   }
-
-  componentDidMount(){  
-      //         bio: "I am Billionaire"
-    // email: "imtony@gmail.com"
-    // isPublic: true
-    // name: "Tony"
-    // password: "123456789"
-    // profilePic: "/images/users/1613135822255.jpeg"
-    // username: "ironman"
-    // __v: 0
-    // _id: "60267fcea6fc854b381626e5"
-    let {name , username , bio , email , password , profilePic} = this.props.user;
-      this.setState({
-        name,
-        username,
-        bio,
-        email,
-        password,
-        profilePic
-      }) 
-  }
-
-
   onUpdatePicHandler = () =>{
       let fileObject = this.fileInput.current.files[0];
       console.log(fileObject);
@@ -71,12 +66,12 @@ class Settings extends Component {
       formData.append('user' , fileObject);
       axios.patch(`/api/user/${this.props.user["_id"]}` , formData).then( obj =>{
           let profilePic = obj.data.updatedUser.profilePic;
+          this.props.updateUser(obj.data.updatedUser);
           this.setState({
               profilePic
           })
       });
   }
-
   onSaveHandler = () =>{
     let formData = new FormData();
     let { name , username , bio , email ,password } = this.state;
