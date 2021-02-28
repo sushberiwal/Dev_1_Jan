@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { Component } from "react";
 import "./Settings.css";
 
@@ -11,6 +12,8 @@ class Settings extends Component {
     profilePic: "",
     disabled: true,
   };
+
+  fileInput = React.createRef();
 
   onChangeHandler = (e) => {
     let type = e.target.id; // name , username , email , password
@@ -27,9 +30,16 @@ class Settings extends Component {
   }
 
   onCancelHandler = () =>{
-      this.setState({
-          disabled:true
-      })
+    let {name , username , bio , email , password , profilePic} = this.props.user;
+    this.setState({
+      name,
+      username,
+      bio,
+      email,
+      password,
+      profilePic,
+      disabled:true
+    }) 
   }
 
   componentDidMount(){  
@@ -53,13 +63,47 @@ class Settings extends Component {
       }) 
   }
 
+
+  onUpdatePicHandler = () =>{
+      let fileObject = this.fileInput.current.files[0];
+      console.log(fileObject);
+      let formData = new FormData();
+      formData.append('user' , fileObject);
+      axios.patch(`/api/user/${this.props.user["_id"]}` , formData).then( obj =>{
+          let profilePic = obj.data.updatedUser.profilePic;
+          this.setState({
+              profilePic
+          })
+      });
+  }
+
+  onSaveHandler = () =>{
+    let formData = new FormData();
+    let { name , username , bio , email ,password } = this.state;
+    formData.append( 'name' , name );
+    formData.append( 'username' , username );
+    formData.append( 'bio' , bio );
+    formData.append( 'email' , email );
+    formData.append( 'password' , password );
+    axios.patch(`/api/user/${this.props.user["_id"]}` , formData).then( obj =>{
+        if(obj.data.updatedUser){
+            this.props.updateUser(obj.data.updatedUser);
+            this.setState({
+                disabled:true
+            })
+        }
+
+    });
+  }
+  
+
   render() {
     return (
       <div className="settings">
         <div className="profile-photo">
           <img src={this.state.profilePic} alt="" />
-          <input type="file" />
-          <button>Update Profile Pic</button>
+          <input type="file" ref={this.fileInput} />
+          <button onClick={this.onUpdatePicHandler}>Update Profile Pic</button>
         </div>
         <div className="profile-details">
           <div className="profile-details-form">
@@ -136,7 +180,7 @@ class Settings extends Component {
           ) : (
             <div className="profile-actions">
               <button className="cancel" onClick={this.onCancelHandler}>CANCEL</button>
-              <button className="save">SAVE</button>
+              <button className="save" onClick={this.onSaveHandler}>SAVE</button>
             </div>
           )}
         </div>

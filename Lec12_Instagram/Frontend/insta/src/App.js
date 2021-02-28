@@ -30,6 +30,14 @@ class App extends Component {
       });
     });
   }
+
+
+  updateUser = (updateUser) =>{
+    this.setState({
+      user : updateUser
+    })
+  }
+
   render() {
     let user = this.state.user;
     return (
@@ -44,7 +52,7 @@ class App extends Component {
               <Profile user={user} />
             </Route>
             <Route path="/settings" exact>
-              <Settings user={user} />
+              <Settings user={user} updateUser={this.updateUser} />
             </Route>
             <Route path="*" exact>
               <Redirect to="/"></Redirect>

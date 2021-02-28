@@ -76,6 +76,8 @@ async function updateUserById(req, res) {
       user.profilePic = profilePicPath;
     }
 
+    console.log(user);
+
     let updatedUser = await user.save();
     console.log(updatedUser);
     res.json({
