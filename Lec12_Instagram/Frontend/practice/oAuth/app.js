@@ -16,7 +16,7 @@ let userModel = require("../../../Backend/model/userModel"); // {name , username
 app.use(express.static("public"));
 app.use(cookie({
     maxAge : 24*24*100 ,
-    keys : ["ajksfhkajbfkjabu"]
+    keys : ["ajksfhkajbfkjabu"]  // userInfo + keys => id cookie save hoti hai => cookie id + keys => userInfo
 }))
 
 app.use(passport.initialize());

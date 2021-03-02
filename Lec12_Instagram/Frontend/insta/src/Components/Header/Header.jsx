@@ -3,6 +3,8 @@ import "./Header.css";
 import { Link } from "react-router-dom";
 
 class Header extends Component {
+  // isAuth = false
+  // isAuth = true
   state = {};
   render() {
     return (
@@ -12,7 +14,8 @@ class Header extends Component {
             <img src="logo.png" alt="" />
           </div>
         </Link>
-        <div className="search-box">
+        {this.props.isAuth ? <React.Fragment>
+          <div className="search-box">
           <input type="text" name="" placeholder="Search" />
         </div>
         <div className="nav-links">
@@ -27,10 +30,18 @@ class Header extends Component {
               <Link to="/settings">Settings</Link>
             </li>
             <li>
-              <Link to="/logout">Logout</Link>
+              <Link to="/" onClick={this.props.logout}>Logout</Link>
             </li>
           </ul>
         </div>
+        </React.Fragment> : <div className="nav-links">
+          <ul>
+            <li>
+              <Link to="/login">Login</Link>
+            </li>
+          </ul>
+        </div> }
+        
       </div>
     );
   }
