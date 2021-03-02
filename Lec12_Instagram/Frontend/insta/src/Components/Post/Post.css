@@ -1,5 +1,5 @@
 .post{
-    height: 700px;
+    height: 650px;
     width: 600px;
     border: 1px solid lightgray;
     margin-bottom: 50px;
@@ -12,7 +12,7 @@
     width: 20%;
 }
 .post-userphoto{
-    height: 80%;
+    height: 70%;
 }
 .post-userphoto img{
     height: 100%;

@@ -38,5 +38,24 @@ async function getAllPosts(req, res) {
   }
 }
 
+
+async function getMyPosts(req , res){
+  try{
+    let uid = req.params.uid;
+    let posts = await postModel.find({uid:uid}).exec();
+    res.json({
+      message:"Succesfully got all posts" ,
+      posts
+    })
+  }
+  catch(error){
+    res.json({
+      message:"Failed to get my posts",
+      error
+    })
+  }
+}
+
 module.exports.createPost = createPost;
 module.exports.getAllPosts = getAllPosts;
+module.exports.getMyPosts = getMyPosts;
