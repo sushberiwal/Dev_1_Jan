@@ -23,7 +23,8 @@ class App extends Component {
     firebaseApp.auth().signOut().then( obj =>{
       console.log("Signed Out !!!!");
       this.setState({
-        isAuth : false
+        isAuth : false ,
+        user : null
       })
     } )
   }
@@ -34,6 +35,30 @@ class App extends Component {
       console.log("logged in");
       console.log(obj.user);
     })
+  }
+
+
+  signup = () =>{
+    // log in to firebase !!!!
+    let id = "tony@gmail.com";
+    let pw = "123456789";
+    firebaseApp.auth().createUserWithEmailAndPassword(id , pw).then( obj =>{
+      console.log("user Created !!");
+      console.log(obj);
+      // add user to usersCollection
+      let uid = obj.user.uid;
+      let email = obj.user.email;
+      let name = "Tony Stark";
+
+      let userSetPromise = firebaseApp.firestore().collection("users").doc(uid).set({
+        Name : name ,
+        Email : email  
+      })
+      return userSetPromise;
+    }).then( obj =>{
+      console.log("Inside user Set Promise Ka then !!!!!");
+      console.log("obj");
+    } )
   }
 
   // componentDidMount() {
@@ -95,7 +120,8 @@ class App extends Component {
           </Route>
           
           <Route path="/about" exact>
-            <About></About>
+            {/* <About></About> */}
+            <Skin></Skin>
           </Route>
           
           <Route path="/templates" exact>
@@ -107,7 +133,7 @@ class App extends Component {
           </Route>
 
           <Route path="/signup">
-            {isAuth ? <Redirect to="/"></Redirect> : <SignUp></SignUp> }
+            {isAuth ? <Redirect to="/"></Redirect> : <SignUp signup = {this.signup}></SignUp> }
           </Route>
 
           <Route path="/signin" exact>

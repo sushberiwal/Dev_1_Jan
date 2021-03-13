@@ -30,10 +30,10 @@ class Skin extends Component {
       { companyName: "", duration: "", position: "" },
     ],
     projects: [
-      { projectName: "", techStack: ["", "", ""], summary: "" , projectLink:"" },
-      { projectName: "", techStack: ["", "", ""], summary: "" , projectLink:""},
-      { projectName: "", techStack: ["", "", ""], summary: ""  , projectLink:""},
-      { projectName: "", techStack: ["", "", ""], summary: ""  , projectLink:""}
+      { projectName: "A", techStack: ["E", "F", "G"], summary: "asfasf" , projectLink:"" },
+      { projectName: "B", techStack: ["J", "I", "H"], summary: "asgasdg" , projectLink:""},
+      { projectName: "C", techStack: ["K", "L", "M"], summary: "asdgasg"  , projectLink:""},
+      { projectName: "D", techStack: ["P", "O", "N"], summary: "asdgasg"  , projectLink:""}
     ],
     skills : {
         language : ["" , "" , ""] ,
@@ -71,9 +71,31 @@ class Skin extends Component {
       graduationMonth,
       graduationYear,
     } = this.state.educationDetails;
+
+    let projects = this.state.projects;
     return (
+      
+      // projects: [
+      //   { projectName: "", techStack: ["", "", ""], summary: "" , projectLink:"" },
+      //   { projectName: "", techStack: ["", "", ""], summary: "" , projectLink:""},
+      //   { projectName: "", techStack: ["", "", ""], summary: ""  , projectLink:""},
+      //   { projectName: "", techStack: ["", "", ""], summary: ""  , projectLink:""}
+      // ]
       <div className="resume-skin">
-        <h1> {fname} </h1>
+        
+        <div className="projects">
+          {  projects.map( project =>{
+            return <ul className="project item">
+                      <li>{project.projectName}</li>
+                      <li>{project.techStack.map( techStack =>{
+                        return <p>{techStack}</p>;
+                      })}</li>
+                      <li>{project.summary}</li>
+            </ul>
+          })}
+
+        </div>
+      
       </div>
     );
   }
