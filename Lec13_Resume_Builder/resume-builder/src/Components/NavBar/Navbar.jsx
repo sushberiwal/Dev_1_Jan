@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import {Link} from "react-router-dom";
+
 class Navbar extends Component {
   state = {};
   render() {
@@ -10,16 +12,16 @@ class Navbar extends Component {
           <div className="navlinks">
             <ul>
               <li>
-                <a href="/templates"> Templates </a>
+                <Link to="/templates">Templates</Link>
               </li>
               <li>
-                <a href="/about"> About </a>
+                <Link to="/about">About</Link>
               </li>
               <li>
-                <a href="/profile"> Profile </a>
+                <Link to ="/profile">Profile</Link>
               </li>
               <li>
-                <a href="/logout"> Logout </a>
+                <Link onClick={this.props.logout}>Logout</Link>
               </li>
             </ul>
           </div>
@@ -27,13 +29,13 @@ class Navbar extends Component {
           <div className="navlinks">
             <ul>
              <li>
-                <a href="/about"> About </a>
+             <Link to="/about">About</Link>
               </li>
               <li>
-                <a href="/signup"> Sign Up </a>
+              <Link to="/signup">Sign Up</Link>
               </li>
               <li>
-                <a href="/signin"> Sign In </a>
+                <Link to="/signin">Sign In</Link>
               </li>
             </ul>
           </div>
