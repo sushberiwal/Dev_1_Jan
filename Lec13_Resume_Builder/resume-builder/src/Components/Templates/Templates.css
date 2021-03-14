@@ -1,0 +1,47 @@
+.templates{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.template{
+    height: 300px;
+    width: 200px;
+    margin: 50px;
+    position: relative;
+    transition: 0.5s transform;
+}
+
+.template-image{
+    height: 90%;
+}
+.template-image img{
+    height: 100%;
+    object-fit: cover;
+}
+
+.choose-template{
+    position: absolute;
+    top: 50%;
+    left: 17%;
+    border: 1px solid #9b59b6;
+    padding: 5px;
+    background:#9b59b6;
+    border-radius: 20px;
+    color: white;
+    display: none;
+    cursor: pointer;
+}
+
+.template:hover .choose-template{
+    /* transform: scale(1.2); */
+    display: block;
+}
+
+
+.template-image img:hover{
+    opacity: 1;
+}
+
+
+

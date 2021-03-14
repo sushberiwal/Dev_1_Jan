@@ -11,7 +11,7 @@ class LandingPage extends Component {
                 <h1>Resume Templates</h1>
                 <p>Pick a resume template, fill it out, and format. Create a professional resume in a few clicks. Just choose one of 18+ resume templates below, add ready-made content, download, and get the job.</p>
             </div>
-            <div className="templates">
+            <div className="choose-templates">
                 {this.props.isAuth ?
                 <Link to="/templates">
                     <button className="btn">Choose Templates</button> 
