@@ -1,13 +1,19 @@
 import React, { Component } from "react";
-
 import {Link} from "react-router-dom";
+
+import "./Navbar.css";
 
 class Navbar extends Component {
   state = {};
   render() {
     return (
       <div className="navbar">
-        <div className="logo"></div>
+        
+        <div className="logo">
+        <Link to="/">
+          <img src="./images/logo.jpg" alt=""/>
+        </Link>
+        </div>
         {this.props.isAuth ? (
           <div className="navlinks">
             <ul>

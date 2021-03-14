@@ -1,0 +1,30 @@
+.landing{
+    height: 250px;
+    width: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    margin: auto;
+    margin-top: 100px;
+}
+
+
+.landing-content{
+
+
+}
+
+.landing-content h1{
+    line-height: 80px;
+    text-align: center;
+}
+
+.landing-content p{
+    line-height: 30px;
+    text-align: center;
+}
+
+.templates{
+
+}

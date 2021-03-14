@@ -80,6 +80,7 @@ class App extends Component {
   // }
 
   componentDidMount(){
+    // event attached to auth state changed
     firebaseApp.auth().onAuthStateChanged( (user) =>{
       console.log("Inside auth state changed !!");
         this.setState({
@@ -115,8 +116,8 @@ class App extends Component {
         <Navbar isAuth = {isAuth} logout = {this.logout}></Navbar>
         <Switch>
           
-          <Route path="/" exact>
-            <LandingPage></LandingPage>
+          <Route path="/" exact >
+            <LandingPage isAuth = { isAuth }></LandingPage>
           </Route>
           
           <Route path="/about" exact>
