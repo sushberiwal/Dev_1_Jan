@@ -3,7 +3,7 @@ import "./skin1.css";
 class Skin extends Component {
   state = {
     contactDetails: {
-      fname: "STEVE",
+      fname: "",
       lname: "",
       summary: "",
       email: "",

@@ -12,6 +12,7 @@ import About from "./Components/About/About";
 import Templates from "./Components/Templates/Templates";
 import Profile from "./Components/Profile/Profile"
 import SignUp from "./Components/SignUp/Signup";
+import Contact from "./Components/Contact/Contact";
 class App extends Component {
   state = {
     isAuth : false,
@@ -37,48 +38,6 @@ class App extends Component {
     })
   }
 
-
-  signup = () =>{
-    // log in to firebase !!!!
-    let id = "tony@gmail.com";
-    let pw = "123456789";
-    firebaseApp.auth().createUserWithEmailAndPassword(id , pw).then( obj =>{
-      console.log("user Created !!");
-      console.log(obj);
-      // add user to usersCollection
-      let uid = obj.user.uid;
-      let email = obj.user.email;
-      let name = "Tony Stark";
-
-      let userSetPromise = firebaseApp.firestore().collection("users").doc(uid).set({
-        Name : name ,
-        Email : email  
-      })
-      return userSetPromise;
-    }).then( obj =>{
-      console.log("Inside user Set Promise Ka then !!!!!");
-      console.log("obj");
-    } )
-  }
-
-  // componentDidMount() {
-    // console.log(firebaseApp);
-    // API call
-    
-    // get all documents
-    // firebaseApp.firestore().collection("resumes").get().then( allDocs =>{
-    //   allDocs.forEach( doc =>{
-    //     console.log(doc.id);
-    //     console.log(doc.data());
-    //   })
-    // })
-    
-    // get a document
-    // firebaseApp.firestore().db.collection("resumes").doc("tIf5NobFzcJjYHJnFZiI").get().then( doc =>{
-    //   console.log(doc.data());
-    // } )
-  // }
-
   componentDidMount(){
     // event attached to auth state changed
     firebaseApp.auth().onAuthStateChanged( (user) =>{
@@ -87,26 +46,9 @@ class App extends Component {
           isAuth : user ? true : false ,
           user : user ? user.uid : null 
         })
-        // this.setState({
-        //   isAuth : false,
-        //   user : null
-        // })
     })
   
   }
-
-  addData = () => {
-    // console.log("Inside add Data !!");
-    // firebaseApp.firestore().collection("resumes").doc("tIf5NobFzcJjYHJnFZiI").update({
-    //   contactDetails : {
-    //     Name : "Sushant",
-    //     Phone : "123456789",
-    //     Email : "abcd@test.com"
-    //   }
-    // }).then( ()=>{
-    //   console.log("skin set !!!");
-    // } )
-  };
 
   render() {
     let { isAuth } = this.state;
@@ -121,13 +63,16 @@ class App extends Component {
           </Route>
           
           <Route path="/about" exact>
-            {/* <About></About> */}
-            <Skin></Skin>
+            <About></About>
+            {/* <Skin></Skin> */}
+          </Route>
+
+          <Route path="/contact" exact>
+            <Contact></Contact>
           </Route>
           
-          <Route path="/templates" exact>
-            {isAuth ? <Templates> </Templates> : <Redirect to="/login"></Redirect>  }
-          </Route>
+          <Route path="/templates" exact component={Templates}></Route>
+            {/* {isAuth ? <Templates> </Templates> : <Redirect to="/login"></Redirect>  } */}          
           
           <Route path="/profile" exact>
             {isAuth ? <Profile></Profile> : <Redirect to="/login"></Redirect>}

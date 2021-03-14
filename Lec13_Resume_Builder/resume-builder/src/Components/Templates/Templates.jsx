@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./Templates.css";
+import firebaseApp from "../../firebase/firebaseConfig";
 
 class Templates extends Component {
   state = {
@@ -14,6 +15,68 @@ class Templates extends Component {
       {id:"skin8" , path:"./images/skin8.svg"},
     ],
   };
+  
+  
+  handleChooseTemplate = (e)=>{
+
+    let skinId = e.target.id;
+    // set document in resumes collection
+    firebaseApp.firestore().collection("resumes").doc().set({
+      skinId : skinId ,
+      contactDetails: {
+        fname: "",
+        lname: "",
+        summary: "",
+        email: "",
+        phone: "",
+        profession: "",
+        street: "",
+        city: "",
+        state: "",
+        country: "",
+        pin: "",
+      },
+      educationDetails: {
+        collegeName: "",
+        degree: "",
+        cgpa: "",
+        collegeCity: "",
+        collegeState: "",
+        graduationMonth: "",
+        graduationYear: "",
+      },
+      experienceDetails: [
+      ],
+      projects: [],
+      skills : {
+          language : [] ,
+          frameworks : [] ,
+          software : [] ,
+          ide : []
+      } ,
+      profileLinks : {
+          linkedIn : "" ,
+          github : "" 
+      } ,
+      achievements : [] ,
+      hobbies : [] 
+    }).then( obj =>{
+      console.log("inside then");
+      console.log(obj);
+    })
+    .catch(error =>{
+      console.log("Inside catch !!!")
+      console.log(error);
+    })
+
+
+
+      // this.props.history.push("/contact"); 
+
+      // window.location = "/contact";  // it will force the page to reload
+  }
+
+
   render() {
     return <div className="templates">
         {this.state.skins.map( skin =>{
@@ -21,7 +84,7 @@ class Templates extends Component {
                 <div className="template-image">
                     <img src={skin.path} alt=""/>
                 </div>
-                <div className="choose-template">Choose Template</div>
+                <div className="choose-template" id={skin.id} onClick={ (e) => this.handleChooseTemplate(e)}>Choose Template</div>
             </div>
         })}
     </div>;
