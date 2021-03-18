@@ -22,13 +22,20 @@ class Templates extends Component {
   handleChooseTemplate = async (e)=>{
     let skinId = e.target.id;
     console.log(skinId);
-    // get skinID 
-    let addObj = await firebaseApp.firestore().collection("resumes").add( { skinId : skinId , ...initialState  }  );
-    let resumeId = addObj.id;
-    await firebaseApp.firestore().collection("users").doc(this.props.uid).update({
-      Resumes: firebase.firestore.FieldValue.arrayUnion(resumeId)
-    })
-    this.props.history.push("/contact");
+    // get skinID
+    let resumeId;
+    if(!this.props.resumeId){
+      let addObj = await firebaseApp.firestore().collection("resumes").add( { skinId : skinId , ...initialState  }  );
+      resumeId = addObj.id;
+      await firebaseApp.firestore().collection("users").doc(this.props.uid).update({
+        Resumes: firebase.firestore.FieldValue.arrayUnion(resumeId)
+      })
+      this.props.history.push("/contact");
+      this.props.setResumeId(resumeId);
+    }
+    else{
+      this.props.history.push("/contact");
+    } 
   }
 
 

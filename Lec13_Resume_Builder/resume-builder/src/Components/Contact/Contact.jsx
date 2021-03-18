@@ -1,6 +1,9 @@
 import React, { Component } from "react";
+import firebaseApp from "../../firebase/firebaseConfig";
 import { contactCodes } from "../../util/codes";
-
+import Skin from "../Skins/Skin";
+import Skin1 from "../Skins/skin1";
+import "./Contact.css";
 class Contact extends Component {
   state = {
     codes: [
@@ -29,6 +32,7 @@ class Contact extends Component {
       country: "",
       pin: "",
     },
+    skinId:null
   };
 
   onChangeHandler = (e) => {
@@ -36,11 +40,30 @@ class Contact extends Component {
 
     let id = e.target.id;
     let value = e.target.value;
-
+    let oldContactDetails = this.state.contactDetails;
     this.setState({
-      [id]: value,
+        contactDetails:{
+            ...oldContactDetails ,
+            [id]:value
+        }
     });
   };
+
+
+  componentDidMount(){
+    // get contactDetails of the selected Resume !!!
+    firebaseApp.firestore().collection("resumes").doc(this.props.resumeId).get().then( doc =>{
+      console.log("Inside component did mount of contact !!!");
+      let {contactDetails , skinId} = doc.data();
+      
+      // console.log(contactDetails);
+      // console.log(skinId);
+      this.setState({
+        contactDetails : contactDetails ,
+        skinId : skinId
+      })
+    })
+  }
 
   render() {
     return (
@@ -53,7 +76,7 @@ class Contact extends Component {
                 <input
                   type="text"
                   id={code}
-                  value={this.state.code}
+                  value={this.state.contactDetails[code]}
                   onChange={(e) => {
                     this.onChangeHandler(e);
                   }}
@@ -63,7 +86,9 @@ class Contact extends Component {
           })}
         </div>
         <div className="resume-viewer">
-          <h1>{this.state.fname}</h1>
+          {/* get skin according to skinId */}
+          {/* <Skin skinId={this.state.skinId} contactDetails = {this.state.contactDetails} ></Skin> */}
+          <Skin1 contactDetails = {this.state.contactDetails}></Skin1>
         </div>
       </div>
     );
