@@ -1,0 +1,297 @@
+.resume-skin{
+    border: 1px solid lightgrey;
+    width: 826.77px;     /* original width = 2,480.31px */
+    height: 1169.29px;   /* original height = 3507.87px */
+    margin: 50px;
+    display: flex;
+    position: absolute;
+    /* color: darkslategray; */
+}
+
+
+
+/* general styling */
+.details{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    margin: 5px;
+}
+.content-body{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+}
+.head{
+    font-size: 17px;
+    font-weight: 700;
+    width: 100%;
+    /* margin-bottom: 5px; */
+    height: 20px;
+    color: #303030;
+}
+.summary{
+    font-size: 13px;
+    font-weight: 400;
+}
+.subhead{
+    font-size: 17px;
+    font-weight: 500;
+}
+.heading{
+    background: #BFDBC8;
+    width: 100%;
+    height: 30px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #303030;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+.body{
+    display: flex;
+    width: 100%;
+}
+
+
+
+
+
+/* resume header */
+.resume-header{
+    height: 170px;
+    width: 791.77px;
+    background-color: white;
+    border: 3px solid #BFDBC8;
+    margin-left: -300px;
+    margin-top: 29px;
+    /* position: relative; */
+    z-index: 1;
+    display: flex;
+    align-items: center;
+}
+.basic-user-details{
+    display: flex;
+    align-items: center;
+    height: 65%;
+}
+.user-info{
+    height: 100%;
+    min-width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #303030;
+    margin-left: 35px;
+}
+.name{
+    font-size: 36px;
+    font-weight: 600;
+    /* color: darkslategray; */
+    color: #303030;
+    max-width: 100%;
+    min-width: 50%;
+    margin-right: 20px;
+}
+.div-line{
+    height: 3px;
+    width: 100%;
+    background: #BFDBC8;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.profession{
+    font-size: 20px;
+    height: 40px;   
+    max-width:100% ;
+    min-width: 50%;
+}
+.user-summary{
+    height: 125%;
+    background: #BFDBC8;
+    max-width: 340px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: darkslategrey;
+    padding: 5px;
+    text-align: center;
+    margin-left: -10px;
+}
+
+
+
+
+
+/* resume body */
+.resume-body{
+    /* border: 1px solid lightgray; */
+    height: 78.3%;
+    width: 57%;
+    margin-top: 202px;
+    /* position: initial; */
+    /* z-index: 0; */
+    margin-left: -483.5px;
+    /* position: relative;*/
+    /* z-index: 2;*/
+}
+/* education details */
+.edutation-details{ 
+    height: 220px;
+}
+.edutation-details .heading{
+    font-size: 20px;
+}
+.edutation-details div{
+    font-size: 15px;
+}
+.college-details{
+    margin-bottom: 5px;
+}
+.school-details{
+margin-bottom: 10px;
+}
+.school-details .subhead{
+    margin-right: 5px;
+}
+.class div{
+    margin-right: 5px;
+    font-size: 15px;
+}
+/* experience details */
+.experience-details{
+    max-height: 200px;
+}
+.experience{
+    margin-bottom: 5px;
+    max-height: 65px;
+    font-size: 12.5px;
+}
+.company-name .head{
+    font-size: 14px;
+}
+/* project details */
+.project-details{
+    max-height: 350px;
+
+}
+.project{
+    height: 70px;
+}
+.project .subhead{  
+    font-size: 15px;
+}
+.project-link{
+    width: 250px;
+    font-size: 10px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+a {
+    text-decoration: none;
+}
+/* POR details */
+.por-details{
+max-height: 200px;
+}
+.por{
+    max-height: 40px;
+    margin-top: 10px;
+    font-size: 13px;
+
+}
+
+
+
+
+
+/* resume-left-strap */
+.resume-left-strap{
+    height: 100%;
+    width: 33%;
+    margin-right: 27px;
+    background-color: #BFDBC8;
+    font-size: 14px;
+}
+.resume-left-strap .heading{
+    background: white;
+}
+.resume-left-strap .head{
+    margin-top: 3px;
+    width: 85%;
+    text-align: center;
+    margin-left: -10px;
+}
+.list{
+    width: 80%;
+    margin-left: 35px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+.list li{
+    min-height: 25px;
+}
+.skills{
+    margin-top: 214px;
+    height: 340px;
+    width: 220px;
+    color: darkslategray;  
+    margin-left: 25px;
+    font-size: 13px;
+    font-weight: 500;
+}
+.achievements{
+    height: 230px;
+    width: 220px;
+    margin-left: 25px;
+    color: darkslategray;
+}
+.interests{
+    height: 140px;
+    width: 220px;
+    margin-left: 25px;
+    color: darkslategray;
+}
+.contact-details{
+    height: 270px;
+    width: 220px;
+    margin-left: 25px;
+    color: darkslategray;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.contact-details .body{
+    flex-direction: column;
+    margin-top: 10px;
+    width: 90%;
+}
+.contact-details .body div{
+    display: flex;
+    min-height: 28px;
+}
+.itag{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 25px;
+    width: 25px;
+    font-size: 20px;
+    margin-right: 10px;
+
+}
+
+
+
+
+
+
+
+
+

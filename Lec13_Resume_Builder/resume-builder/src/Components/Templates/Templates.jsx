@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import "./Templates.css";
 import firebaseApp from "../../firebase/firebaseConfig";
+import firebase from "firebase";
+import initialState from "../../util/initialState";
 
 class Templates extends Component {
   state = {
     skins: [
-      {id:"skin1" , path:"./images/skin1.svg"},
-      {id:"skin2" , path:"./images/skin2.svg"},
+      {id:"skin1" , path:"./images/skini.png"},
+      {id:"skin2" , path:"./images/skinv.png"},
       {id:"skin3" , path:"./images/skin3.svg"},
       {id:"skin4" , path:"./images/skin4.svg"},
       {id:"skin5" , path:"./images/skin5.svg"},
@@ -17,63 +19,16 @@ class Templates extends Component {
   };
   
   
-  handleChooseTemplate = (e)=>{
-
+  handleChooseTemplate = async (e)=>{
     let skinId = e.target.id;
-    // set document in resumes collection
-    firebaseApp.firestore().collection("resumes").doc().set({
-      skinId : skinId ,
-      contactDetails: {
-        fname: "",
-        lname: "",
-        summary: "",
-        email: "",
-        phone: "",
-        profession: "",
-        street: "",
-        city: "",
-        state: "",
-        country: "",
-        pin: "",
-      },
-      educationDetails: {
-        collegeName: "",
-        degree: "",
-        cgpa: "",
-        collegeCity: "",
-        collegeState: "",
-        graduationMonth: "",
-        graduationYear: "",
-      },
-      experienceDetails: [
-      ],
-      projects: [],
-      skills : {
-          language : [] ,
-          frameworks : [] ,
-          software : [] ,
-          ide : []
-      } ,
-      profileLinks : {
-          linkedIn : "" ,
-          github : "" 
-      } ,
-      achievements : [] ,
-      hobbies : [] 
-    }).then( obj =>{
-      console.log("inside then");
-      console.log(obj);
+    console.log(skinId);
+    // get skinID 
+    let addObj = await firebaseApp.firestore().collection("resumes").add( { skinId : skinId , ...initialState  }  );
+    let resumeId = addObj.id;
+    await firebaseApp.firestore().collection("users").doc(this.props.uid).update({
+      Resumes: firebase.firestore.FieldValue.arrayUnion(resumeId)
     })
-    .catch(error =>{
-      console.log("Inside catch !!!")
-      console.log(error);
-    })
-
-
-
-      // this.props.history.push("/contact"); 
-
-      // window.location = "/contact";  // it will force the page to reload
+    this.props.history.push("/contact");
   }
 
 

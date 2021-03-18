@@ -10,6 +10,12 @@
     margin: 50px;
     position: relative;
     transition: 0.5s transform;
+    border: 1px solid lightgray;
+    border-radius: 20px;
+    box-shadow: 0px 0px 20px 0px rgb(192 164 197);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .template-image{
@@ -31,6 +37,7 @@
     color: white;
     display: none;
     cursor: pointer;
+    font-size: 15px;
 }
 
 .template:hover .choose-template{
