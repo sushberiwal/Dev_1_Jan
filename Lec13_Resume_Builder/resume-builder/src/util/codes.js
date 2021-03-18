@@ -11,3 +11,13 @@ export let contactCodes =  {
     "country":"COUNTRY",
     "pin":"PINCODE"
 }
+
+export let educationCodes = {
+    "cgpa":"CGPA",
+    "collegeCity":"COLLEGE CITY",
+    "collegeName":"COLLEGE NAME",
+    "collegeState":"COLLEGE STATE",
+    "degree":"DEGREE" ,
+    "graduationMonth":"GRADUATION MONTH",
+    "graduationYear":"GRADUATION YEAR"
+}

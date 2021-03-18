@@ -13,6 +13,8 @@ import Templates from "./Components/Templates/Templates";
 import Profile from "./Components/Profile/Profile"
 import SignUp from "./Components/SignUp/Signup";
 import Contact from "./Components/Contact/Contact";
+import Education from "./Components/Education/Education";
+import Finalize from "./Components/Finalize/Finalize";
 class App extends Component {
   state = {
     isAuth : false,
@@ -90,7 +92,8 @@ class App extends Component {
           </Route>
 
           <Route path="/contact" exact render={  (props) => this.state.isAuth ? <Contact {...props} uid={this.state.user} resumeId={this.state.selectResumeId} ></Contact> : <Redirect to="/signin"></Redirect>  }></Route>
-          
+          <Route path="/education" exact render={  (props) => this.state.isAuth ? <Education {...props} uid={this.state.user} resumeId={this.state.selectResumeId} ></Education> : <Redirect to="/signin"></Redirect>  }></Route>
+          <Route path="/finalize" exact render={  (props) => this.state.isAuth ? <Finalize {...props} uid={this.state.user} resumeId={this.state.selectResumeId} ></Finalize> : <Redirect to="/signin"></Redirect>  }></Route>
           {/* <Route path="/templates" exact component={Templates}></Route> */}
           {/* {isAuth ? <Templates> </Templates> : <Redirect to="/login"></Redirect>  } */}     
 

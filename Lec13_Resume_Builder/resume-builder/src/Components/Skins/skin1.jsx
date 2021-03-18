@@ -108,16 +108,18 @@ class Skin1 extends Component {
       state,
       country,
       pin,
-    } = this.props.contactDetails;
+    } = this.props.contactDetails ? this.props.contactDetails : this.state.contactDetails;
+    
     let {
       collegeName,
       degree,
       cgpa,
       collegeCity,
       collegeState,
-      collegeCountry,
-      duration,
-    } = this.state.educationDetails;
+      collegeCountry
+    } = this.props.educationDetails ? this.props.educationDetails : this.state.educationDetails;
+
+
     let experienceDetails = this.state.experienceDetails;
     let projects = this.state.projects;
     let skills = this.state.skills;
@@ -236,12 +238,8 @@ class Skin1 extends Component {
                   ", " +
                   collegeState +
                   ", " +
-                  collegeCountry +
-                  " | " +
                   "CGPA : " +
-                  cgpa +
-                  " | " +
-                  duration}
+                  cgpa }
               </div>
             </div>
             <div className="line"></div>

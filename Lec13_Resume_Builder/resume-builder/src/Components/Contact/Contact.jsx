@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import firebaseApp from "../../firebase/firebaseConfig";
 import { contactCodes } from "../../util/codes";
-import Skin from "../Skins/Skin";
 import Skin1 from "../Skins/skin1";
 import "./Contact.css";
+
+
 class Contact extends Component {
   state = {
     codes: [
@@ -65,6 +66,20 @@ class Contact extends Component {
     })
   }
 
+  nextButtonHandler = async ()=>{
+    console.log("next button clicked !!");
+    // save contactDetails object in doc
+    await firebaseApp.firestore().collection("resumes").doc(this.props.resumeId).update({
+      contactDetails : this.state.contactDetails
+    });
+    this.props.history.push("/education");
+  }
+
+  backButtonHandler = ()=>{
+    console.log("back button clicked !!");
+    this.props.history.goBack();
+  }
+
   render() {
     return (
       <div className="contact-details">
@@ -84,6 +99,8 @@ class Contact extends Component {
               </div>
             );
           })}
+          <button className="btn" onClick={this.nextButtonHandler}>Next</button>
+          <button className="btn" onClick={this.backButtonHandler}>Back</button>
         </div>
         <div className="resume-viewer">
           {/* get skin according to skinId */}
