@@ -18,6 +18,9 @@
   },
   "homepage": "https://github.com/sushberiwal/Dev_1_Jan#readme",
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.35",
+    "@fortawesome/free-solid-svg-icons": "^5.15.3",
+    "@fortawesome/react-fontawesome": "^0.1.14",
     "axios": "^0.21.1",
     "cheerio": "^1.0.0-rc.5",
     "express": "^4.17.1",

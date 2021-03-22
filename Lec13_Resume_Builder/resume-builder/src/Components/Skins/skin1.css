@@ -1,6 +1,9 @@
 .resume-skin{
-    width: 700px;
-    background: #2a374a;
+    /* width: 700px; */
+    width: 50% !important;
+    background: #2a374a; 
+    size: 21cm 29.7cm;
+    margin: 30mm 45mm 30mm 45mm;
 }
 .skin-top{
     background: #fb4447;

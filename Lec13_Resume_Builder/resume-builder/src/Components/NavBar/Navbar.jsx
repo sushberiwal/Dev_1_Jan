@@ -24,6 +24,9 @@ class Navbar extends Component {
                 <Link to="/about">About</Link>
               </li>
               <li>
+                <Link to="/myresumes">My Resumes</Link>
+              </li>
+              <li>
                 <Link to ="/profile">Profile</Link>
               </li>
               <li>
