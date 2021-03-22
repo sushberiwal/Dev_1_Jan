@@ -37,26 +37,33 @@ class MyResume extends Component {
   // arrow function
 
   handleSelectResume = async (e) => {
+      
       let selectedResumeId = e.target.id;
       console.log(selectedResumeId);
       let allResumes = this.state.myResumesList;
+      
       let updatedResumeList = [];
+
       for(let i=0 ; i<allResumes.length ; i++ ){
           let {isSelected , resumeDetails , resumeId} = allResumes[i];
-          if(isSelected == true){
+          if(isSelected == true ){
             allResumes[i].isSelected = false;
           }
           else if(resumeId == selectedResumeId){
             allResumes[i].isSelected = true;
           }
-          updatedResumeList.push({isSelected , resumeId});
+          updatedResumeList.push({ isSelected:allResumes[i].isSelected , resumeId:allResumes[i].resumeId});
         }
+
+        console.log(updatedResumeList);
+
         await firebaseApp.firestore().collection("users").doc(this.props.uid).update({
           Resumes : updatedResumeList
         });
-        this.setState({
-          myResumesList : allResumes
-        })
+        // this.setState({
+        //   myResumesList : allResumes
+        // })
+        this.props.setResumeId(selectedResumeId);
   }
 
   render() {
@@ -75,8 +82,8 @@ class MyResume extends Component {
                   <React.Fragment>
                   <FontAwesomeIcon icon={faCheckCircle}></FontAwesomeIcon> 
                   <div className="template-actions">
-                      <div className="edit">Edit</div>
-                      <div className="view">View</div>
+                      <div className="edit" onClick={ () => this.props.history.push("/contact")}>Edit</div>
+                      <div className="view" onClick={() => this.props.history.push("/finalize")}>View</div>
                   </div>
                   </React.Fragment> :
                   <React.Fragment>

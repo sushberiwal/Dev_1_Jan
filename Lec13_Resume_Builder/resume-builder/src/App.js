@@ -161,6 +161,7 @@ class App extends Component {
                     {...props}
                     uid={this.state.user}
                     resumeId={this.state.selectResumeId}
+                    setResumeId = {this.setResumeId}
                   ></MyResume>
                 ) : (
                   <Redirect to="/signin"></Redirect>
