@@ -52,10 +52,20 @@ class Education extends Component {
   };
 
   componentDidMount() {
-    this.setState({
-      contactDetails: this.props.location.state.contactDetails,
-      skinId:this.props.location.state.skinId
-    })
+    if(this.props.location.state.resumeId){
+      this.setState({
+        contactDetails : this.props.location.state.contactDetails,
+        skinId:this.props.location.state.skinId,
+        educationDetails : this.props.location.state.originalDetails.educationDetails
+      })
+    }
+    else{
+      this.setState({
+        contactDetails: this.props.location.state.contactDetails,
+        skinId:this.props.location.state.skinId
+      })
+    }
+
     // get contactDetails of the selected Resume !!!
     // firebaseApp.firestore().collection("resumes").doc(this.props.resumeId).get().then( doc =>{
     //   console.log("Inside component did mount of education !!!");
@@ -80,9 +90,24 @@ class Education extends Component {
     //   .update({
     //     educationDetails: this.state.educationDetails,
     //   });
-    let {contactDetails , skinId} = this.props.location.state;
-    let { educationDetails } = this.state;
-    this.props.history.push({ pathname:"/finalize" , state:{contactDetails , educationDetails , skinId}   });
+    if(this.props.location.state.resumeId){
+      this.props.history.push({
+        pathname: "/finalize",
+        state: {
+          contactDetails: this.state.contactDetails,
+          educationDetails : this.state.educationDetails,
+          skinId: this.state.skinId,
+          originalDetails : this.props.location.state.originalDetails ,
+          resumeId : this.props.location.state.resumeId
+        },
+      });
+    }
+    else{
+      let {contactDetails , skinId} = this.props.location.state;
+      let { educationDetails } = this.state;
+      this.props.history.push({ pathname:"/finalize" , state:{contactDetails , educationDetails , skinId}   });
+    }
+
   };
 
   backButtonHandler = () => {

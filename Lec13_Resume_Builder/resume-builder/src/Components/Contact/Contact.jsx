@@ -49,15 +49,29 @@ class Contact extends Component {
   };
 
   componentDidMount() {
-    if(this.props.location.state.contactDetails){
+    // if coming back from education page
+    if (this.props.location.state.contactDetails) {
       this.setState({
-        contactDetails : this.props.location.state.contactDetails,
+        contactDetails: this.props.location.state.contactDetails,
+        skinId: this.props.location.state.skinId,
+      });
+    } else if (this.props.location.state.resumeId) {
+      console.log("Coming from my resumes !!!");
+      // if coming from myResumes
+      // contactDetails
+      // skinId
+      // selectedResumeId
+      this.setState({
+        contactDetails: this.props.location.state.resumeDetails.contactDetails,
+        skinId: this.props.location.state.resumeDetails.skinId,
+      });
+    } else {
+      // if coming from templates page
+      this.setState({
         skinId: this.props.location.state.skinId,
       });
     }
-    this.setState({
-      skinId: this.props.location.state.skinId,
-    });
+
     // get contactDetails of the selected Resume !!!
     // firebaseApp.firestore().collection("resumes").doc(this.props.resumeId).get().then( doc =>{
     //   console.log("Inside component did mount of contact !!!");
@@ -78,13 +92,26 @@ class Contact extends Component {
     // await firebaseApp.firestore().collection("resumes").doc(this.props.resumeId).update({
     //   contactDetails : this.state.contactDetails
     // });
-    this.props.history.push({
-      pathname: "/education",
-      state: {
-        contactDetails: this.state.contactDetails,
-        skinId: this.state.skinId,
-      },
-    });
+    if(this.props.location.state.resumeId){
+      this.props.history.push({
+        pathname: "/education",
+        state: {
+          contactDetails: this.state.contactDetails,
+          skinId: this.state.skinId,
+          originalDetails : this.props.location.state.resumeDetails ,
+          resumeId : this.props.location.state.resumeId
+        },
+      });
+    }
+    else{
+          this.props.history.push({
+            pathname: "/education",
+            state: {
+              contactDetails: this.state.contactDetails,
+              skinId: this.state.skinId,
+            },
+          });
+    }
   };
 
   backButtonHandler = () => {

@@ -35,26 +35,52 @@ class Finalize extends Component {
   };
 
   handleSave = async () => {
-    // save to firebase
-    let resumeData = {
-      ...initialState,
-      contactDetails: this.state.contactDetails,
-      educationDetails: this.state.educationDetails,
-      skinId: this.state.skinId,
-    };
-    console.log(resumeData);
-    let doc = await firebaseApp.firestore().collection("resumes").add(resumeData);
-    console.log(doc);
-    let resumeId = doc.id;
-    console.log(resumeId);
+    if(this.props.location.state.resumeId){
+      // when updating a resume
+      let resumeData = {
+        ...this.props.location.state.originalDetails,
+        contactDetails: this.state.contactDetails,
+        educationDetails: this.state.educationDetails,
+        skinId: this.state.skinId,
+      };
+      await firebaseApp.firestore().collection("resumes").doc(this.props.location.state.resumeId).update(resumeData);
+    }
+    else{
+      // when creating a new resume
+      let resumeData = {
+        ...initialState,
+        contactDetails: this.state.contactDetails,
+        educationDetails: this.state.educationDetails,
+        skinId: this.state.skinId,
+      };
+      console.log(resumeData);
+      let doc = await firebaseApp.firestore().collection("resumes").add(resumeData);
+      console.log(doc);
+      let resumeId = doc.id;
+      console.log(resumeId);
+  
+      await firebaseApp.firestore().collection("users").doc(this.props.uid).update({
+            Resumes: firebase.firestore.FieldValue.arrayUnion( {isSelected:false , resumeId} )
+          })
+    }
 
-    await firebaseApp.firestore().collection("users").doc(this.props.uid).update({
-          Resumes: firebase.firestore.FieldValue.arrayUnion( {isSelected:false , resumeId} )
-        })
+
   };
 
   componentDidMount() {
-    if(this.props.location.state.resumeDetails){
+    if(this.props.location.state.resumeId){
+      let {
+        skinId,
+        contactDetails,
+        educationDetails,
+      } = this.props.location.state;
+      this.setState({
+        skinId,
+        educationDetails,
+        contactDetails,
+      });
+    }
+    else if(this.props.location.state.resumeDetails){
       let {
         skinId,
         contactDetails,

@@ -77,10 +77,19 @@ class MyResume extends Component {
       }
       return false;
     });
-
     console.log(currentResumeDetails);
     this.props.history.push( {pathname:"/finalize" , state:{ resumeSaved : true , resumeDetails : currentResumeDetails[0].resumeDetails}} )
   };
+
+  handleEdit = () =>{
+    let currentResumeDetails = this.state.myResumesList.filter((resumeInfo) => {
+      if (resumeInfo.isSelected) {
+        return true;
+      }
+      return false;
+    });
+    this.props.history.push( {pathname:"/contact" , state:{ resumeId : currentResumeDetails[0].resumeId  , resumeDetails : currentResumeDetails[0].resumeDetails}} )
+  }
 
   render() {
     return (
@@ -103,7 +112,7 @@ class MyResume extends Component {
                       <div className="template-actions">
                         <div
                           className="edit"
-                          onClick={() => this.props.history.push({pathname:"/contact" })}
+                          onClick={this.handleEdit}
                         >
                           Edit
                         </div>
