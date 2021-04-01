@@ -27,6 +27,7 @@ class App extends Component {
     isAuth: false,
     user: null,
     selectResumeId: null,
+    resumeDetails : null
   };
 
   setResumeId = (id) => {
@@ -80,10 +81,15 @@ class App extends Component {
           }
         }
       }
+      // get resume details
+      let resumeInfo = await firebaseApp.firestore().collection("resumes").doc(selectResumeId).get();
+      let resumeDetails = resumeInfo.data();
+
       this.setState({
         isAuth: user ? true : false,
         user: user ? user.uid : null,
         selectResumeId: selectResumeId,
+        resumeDetails : resumeDetails
       });
     });
   }
@@ -112,7 +118,7 @@ class App extends Component {
                   <Contact
                     {...props}
                     uid={this.state.user}
-                    resumeId={this.state.selectResumeId}
+                    // resumeId={this.state.selectResumeId}
                   ></Contact>
                 ) : (
                   <Redirect to="/signin"></Redirect>
@@ -127,7 +133,7 @@ class App extends Component {
                   <Education
                     {...props}
                     uid={this.state.user}
-                    resumeId={this.state.selectResumeId}
+                    // resumeId={this.state.selectResumeId}
                   ></Education>
                 ) : (
                   <Redirect to="/signin"></Redirect>
@@ -142,7 +148,7 @@ class App extends Component {
                   <Finalize
                     {...props}
                     uid={this.state.user}
-                    resumeId={this.state.selectResumeId}
+                    // resumeId={this.state.selectResumeId}
                   ></Finalize>
                 ) : (
                   <Redirect to="/signin"></Redirect>
