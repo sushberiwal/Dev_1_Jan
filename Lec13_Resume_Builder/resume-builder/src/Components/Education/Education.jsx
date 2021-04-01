@@ -53,18 +53,18 @@ class Education extends Component {
 
       componentDidMount(){
         // get contactDetails of the selected Resume !!!
-        firebaseApp.firestore().collection("resumes").doc(this.props.resumeId).get().then( doc =>{
-          console.log("Inside component did mount of education !!!");
-          let {contactDetails , educationDetails , skinId} = doc.data();
+        // firebaseApp.firestore().collection("resumes").doc(this.props.resumeId).get().then( doc =>{
+        //   console.log("Inside component did mount of education !!!");
+        //   let {contactDetails , educationDetails , skinId} = doc.data();
           
-          // console.log(contactDetails);
-          // console.log(skinId);
-          this.setState({
-            contactDetails : contactDetails ,
-            educationDetails : educationDetails,
-            skinId : skinId 
-          })
-        })
+        //   // console.log(contactDetails);
+        //   // console.log(skinId);
+        //   this.setState({
+        //     contactDetails : contactDetails ,
+        //     educationDetails : educationDetails,
+        //     skinId : skinId 
+        //   })
+        // })
       }
 
       nextButtonHandler = async ()=>{
@@ -78,7 +78,13 @@ class Education extends Component {
     
       backButtonHandler = ()=>{
         console.log("back button clicked !!");
-        this.props.history.goBack();
+        this.props.history.push({
+          pathname:"/contact",
+          state:{
+            contactDetails : this.state.contactDetails,
+            skinId : this.state.skinId 
+          }
+        })
       }
     
 

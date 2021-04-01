@@ -1,17 +1,15 @@
 .landing{
-    height: 250px;
+    height: 550px;
     width: 600px;
     display: flex;
     align-items: center;
     justify-content: space-around;
     flex-direction: column;
     margin: auto;
-    margin-top: 100px;
 }
 
 
 .landing-content{
-
 
 }
 
@@ -23,5 +21,13 @@
 .landing-content p{
     line-height: 30px;
     text-align: center;
+}
+.resume-logo{
+    width: 60%;
+}
+
+.resume-logo img{
+    height: 100%;
+    width: 100%;
 }
 

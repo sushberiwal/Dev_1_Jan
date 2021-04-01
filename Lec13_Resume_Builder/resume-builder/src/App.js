@@ -22,11 +22,14 @@ import Education from "./Components/Education/Education";
 import Finalize from "./Components/Finalize/Finalize";
 import MyResumes from "./Components/MyResumes/MyResumes";
 import PreviewResume from "./Components/PreviewResume/PreviewResume";
+import resumeDetails from "./util/initialState";
 class App extends Component {
+  
   state = {
     isAuth: false,
     user: null,
     selectResumeId: null,
+    resumeDetails : resumeDetails
   };
 
   setResumeId = (id) => {
@@ -64,6 +67,7 @@ class App extends Component {
     firebaseApp.auth().onAuthStateChanged(async (user) => {
       console.log("Inside auth state changed !!");
       let selectResumeId = null;
+      let resumeDetails;
       // check if logged in ??
       if (user) {
         // get selected resumeId
@@ -79,11 +83,14 @@ class App extends Component {
             break;
           }
         }
+        let resumeInfo = await firebaseApp.firestore().collection("resumes").doc(selectResumeId).get();
+        resumeDetails = resumeInfo.data();
       }
       this.setState({
         isAuth: user ? true : false,
         user: user ? user.uid : null,
         selectResumeId: selectResumeId,
+        resumeDetails : resumeDetails ? resumeDetails : this.state.resumeDetails
       });
     });
   }
@@ -127,7 +134,7 @@ class App extends Component {
                   <Contact
                     {...props}
                     uid={this.state.user}
-                    resumeId={this.state.selectResumeId}
+                    // resumeId={this.state.selectResumeId}
                   ></Contact>
                 ) : (
                   <Redirect to="/signin"></Redirect>
@@ -142,7 +149,7 @@ class App extends Component {
                   <Education
                     {...props}
                     uid={this.state.user}
-                    resumeId={this.state.selectResumeId}
+                    // resumeId={this.state.selectResumeId}
                   ></Education>
                 ) : (
                   <Redirect to="/signin"></Redirect>
@@ -175,8 +182,8 @@ class App extends Component {
                   <Templates
                     {...props}
                     uid={this.state.user}
-                    resumeId={this.state.selectResumeId}
-                    setResumeId={this.setResumeId}
+                    // resumeId={this.state.selectResumeId}
+                    // setResumeId={this.setResumeId}
                   ></Templates>
                 ) : (
                   <Redirect to="/signin"></Redirect>

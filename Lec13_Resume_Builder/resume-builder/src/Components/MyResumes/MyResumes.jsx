@@ -70,7 +70,7 @@ class MyResumes extends Component {
                 {resume.isSelected && <FontAwesomeIcon icon={faCheckCircle}></FontAwesomeIcon> }
             </div>
         })}
-            </React.Fragment> : <h1>Loading Resumes Sit Tight !!!</h1> }
+            </React.Fragment> : <div class="loader"></div> }
     </div> );
     }
 }
